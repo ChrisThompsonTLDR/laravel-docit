@@ -1,0 +1,163 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Build the Hyde static site and copy output to the consuming project's docs/ directory.
+ * Invoked as vendor/bin/build-docs from the project root.
+ */
+
+$packageDir = realpath(dirname(__DIR__));
+$projectRoot = dirname(dirname($packageDir));
+
+$docsDir = $projectRoot . DIRECTORY_SEPARATOR . 'docs';
+
+chdir($packageDir);
+
+// Install PHP dependencies (required for hyde binary)
+$composerCmd = 'composer install --no-interaction';
+passthru($composerCmd, $code);
+if ($code !== 0) {
+    fwrite(STDERR, "Error: composer install failed.\n");
+    exit(1);
+}
+
+// Build assets
+$npmCmd = 'npm ci 2>/dev/null || npm install';
+$npmBuild = 'npm run build';
+passthru($npmCmd, $code);
+if ($code !== 0) {
+    fwrite(STDERR, "Warning: npm ci failed, trying npm run build anyway.\n");
+}
+passthru($npmBuild, $code);
+if ($code !== 0) {
+    fwrite(STDERR, "Error: npm run build failed.\n");
+    exit(1);
+}
+
+// Build Hyde site (use package's hyde binary)
+$hydeCmd = 'php hyde build --pretty-urls --no-interaction';
+passthru($hydeCmd, $code);
+if ($code !== 0) {
+    fwrite(STDERR, "Error: hyde build failed.\n");
+    exit(1);
+}
+
+// Copy _site to docs/
+$siteDir = $packageDir . DIRECTORY_SEPARATOR . '_site';
+if (!is_dir($siteDir)) {
+    fwrite(STDERR, "Error: _site directory not found after build.\n");
+    exit(1);
+}
+
+if (is_dir($docsDir)) {
+    $resolvedDocsDir = realpath($docsDir);
+    $expectedBase = realpath($projectRoot);
+    if ($resolvedDocsDir === false || $expectedBase === false) {
+        fwrite(STDERR, "Error: Could not resolve docs path.\n");
+        exit(1);
+    }
+    if ($resolvedDocsDir === '' || $resolvedDocsDir === '/' || $resolvedDocsDir === $expectedBase) {
+        fwrite(STDERR, "Error: Refusing to delete docs path for safety.\n");
+        exit(1);
+    }
+    if (!str_starts_with($resolvedDocsDir, $expectedBase . DIRECTORY_SEPARATOR)) {
+        fwrite(STDERR, "Error: Docs path is outside project root.\n");
+        exit(1);
+    }
+    $files = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($resolvedDocsDir, RecursiveDirectoryIterator::SKIP_DOTS),
+        RecursiveIteratorIterator::CHILD_FIRST
+    );
+    foreach ($files as $file) {
+        $file->isDir() ? rmdir($file->getRealPath()) : unlink($file->getRealPath());
+    }
+    rmdir($resolvedDocsDir);
+}
+
+$iterator = new RecursiveIteratorIterator(
+    new RecursiveDirectoryIterator($siteDir, RecursiveDirectoryIterator::SKIP_DOTS),
+    RecursiveIteratorIterator::SELF_FIRST
+);
+
+foreach ($iterator as $item) {
+    $target = $docsDir . DIRECTORY_SEPARATOR . $iterator->getSubPathname();
+    if ($item->isDir()) {
+        if (!is_dir($target)) {
+            mkdir($target, 0755, true);
+        }
+    } else {
+        $targetDir = dirname($target);
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+        copy($item->getRealPath(), $target);
+    }
+}
+
+// Apply security and accessibility patches to search.html (duplicate IDs, RegExp escaping)
+$searchHtmlPath = $docsDir . DIRECTORY_SEPARATOR . 'docs' . DIRECTORY_SEPARATOR . 'search.html';
+if (file_exists($searchHtmlPath)) {
+    $html = file_get_contents($searchHtmlPath);
+    // Fix duplicate IDs: inline block (first occurrence only)
+    $html = preg_replace(
+        '#<div id="hyde-search" x-data="hydeSearch">\s*<template id="search-highlight-template">#',
+        '<div id="hyde-search-inline" x-data="hydeSearch">' . "\n    " . '<template id="search-highlight-template-inline">',
+        $html,
+        1
+    );
+    $html = preg_replace(
+        '#id="search-input" x-model="searchTerm" @input="search\(\)" placeholder="Search\.\.\." autocomplete="off" autofocus\s+class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3 max-w-sm"#',
+        'id="search-input-inline" x-model="searchTerm" @input="search()" placeholder="Search..." autocomplete="off" autofocus' . "\n                " . 'class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3 max-w-sm"',
+        $html,
+        1
+    );
+    // Fix duplicate IDs: modal block (second occurrence - no max-w-sm)
+    $html = preg_replace(
+        '#<div id="hyde-search" x-data="hydeSearch">\s*<template id="search-highlight-template">#',
+        '<div id="hyde-search-modal" x-data="hydeSearch">' . "\n    " . '<template id="search-highlight-template-modal">',
+        $html,
+        1
+    );
+    $html = preg_replace(
+        '#id="search-input" x-model="searchTerm" @input="search\(\)" placeholder="Search\.\.\." autocomplete="off" autofocus\s+class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3"#',
+        'id="search-input-modal" x-model="searchTerm" @input="search()" placeholder="Search..." autocomplete="off" autofocus' . "\n                " . 'class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3"',
+        $html,
+        1
+    );
+    $html = str_replace("document.getElementById('search-input').focus()", "document.getElementById('search-input-modal').focus()", $html);
+    // Add escapeRegExp and fix RegExp usage
+    $escapeRegExp = "function escapeRegExp(string) {\n    return string.replace(/[.*+?^\\\${}()|[\\]\\\\]/g, '\\\\\\\\\$&');\n}\n\n";
+    $html = str_replace(
+        "function initHydeSearch(searchIndexUrl) {\n    return {",
+        $escapeRegExp . "function initHydeSearch(searchIndexUrl) {\n    return {",
+        $html
+    );
+    $html = str_replace(
+        "const searchResults = this.searchIndex.filter(entry =>",
+        "const escapedTerm = escapeRegExp(this.searchTerm);\n            const searchResults = this.searchIndex.filter(entry =>",
+        $html
+    );
+    $html = str_replace(
+        "new RegExp(this.searchTerm, 'gi')",
+        "new RegExp(escapedTerm, 'gi')",
+        $html
+    );
+    $html = str_replace(
+        'this.getSearchContext(result.content)',
+        'this.getSearchContext(result.content, escapedTerm)',
+        $html
+    );
+    $html = str_replace(
+        "getSearchContext(content) {",
+        "getSearchContext(content, escapedTerm) {",
+        $html
+    );
+    $html = str_replace(
+        "const template = document.getElementById('search-highlight-template');",
+        "const template = this.\$el.querySelector('template');",
+        $html
+    );
+    file_put_contents($searchHtmlPath, $html);
+}
+
+echo "Docs built successfully to {$docsDir}\n";

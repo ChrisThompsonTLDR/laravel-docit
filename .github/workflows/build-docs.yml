@@ -1,0 +1,65 @@
+# Reusable workflow: build docs site and optionally commit.
+# Call from your root .github/workflows/ to build and deploy docs.
+#
+# Usage from root workflow:
+#   jobs:
+#     build:
+#       uses: ./packages/docit/.github/workflows/build-docs.yml
+#       with:
+#         docit-path: packages/docit
+#         commit: true
+#
+# For Composer-installed docit (vendor/christhompsontldr/docit):
+#   docit-path: vendor/christhompsontldr/docit
+
+name: Build docs (docit)
+
+on:
+  workflow_call:
+    inputs:
+      docit-path:
+        description: 'Path to docit package (relative to repo root)'
+        required: false
+        default: 'packages/docit'
+        type: string
+      commit:
+        description: 'Commit built docs to the repository'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify docit package exists
+        run: |
+          if [ ! -d "${{ inputs.docit-path }}" ]; then
+            echo "::error::${{ inputs.docit-path }} not found. Ensure docit is at the expected path."
+            exit 1
+          fi
+
+      - name: Build docs
+        run: php ${{ inputs.docit-path }}/artisan docit
+
+      - name: Add .nojekyll
+        run: touch docs/.nojekyll
+
+      - name: Commit docs
+        if: inputs.commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: docs
+          message: Build docs site
