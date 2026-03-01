@@ -15,7 +15,8 @@
 
 @import 'tailwindcss';
 
-@source "../../_pages/**/*.blade.php";
+@source "../../_pages/**/*.md";
+@source "../../_pages/**/*.html";
 @source "../../_docs/**/*.md";
 
 @theme {

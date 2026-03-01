@@ -5,26 +5,22 @@ navigation:
   group: Getting Started
 ---
 
-# Laravel RunPod
+# Docit
 
-Laravel integration for the [RunPod REST API](https://rest.runpod.io/v1) and RunPod S3-compatible network volume storage. Provides a fluent, Laravel-esque interface for managing pods, serverless endpoints, network volumes, templates, container registry auths, billing, and file storage.
+Docit is a HydePHP-based static site generator for building documentation sites. It builds Markdown content into a static site and copies the output to your project's `docs/` directory—perfect for GitHub Pages, GitLab Pages, or any static hosting.
+
+## Features
+
+- **Markdown-first** – Write docs in plain Markdown, no Blade required
+- **HydePHP-powered** – Full Hyde feature set: search, dark mode, sitemaps, RSS
+- **GitHub Actions ready** – Reusable workflow for build-and-deploy
+- **Monorepo friendly** – Works as a package at `packages/laravel-docit` or via Composer
 
 ## Requirements
 
 - PHP 8.2+
-- Laravel 11 or 12
+- Node.js (for Tailwind asset compilation)
 
 ## Quick Start
 
-```bash
-composer require christhompsontldr/laravel-runpod
-```
-
-Then head to [Installation](installation) to configure your API keys and storage.
-
-## Capabilities
-
-- **Pods** – Persistent GPU instances with full lifecycle management
-- **Serverless** – Endpoints with auto-scaling workers and idle timeout
-- **Storage** – S3-compatible network volumes with fluent file sync
-- **Guardrails** – Configurable usage limits to control costs
+Add a `docit` script to your `composer.json` and run `composer docit`. See [Installation](installation) and [Quick Start](quick-start) for details.

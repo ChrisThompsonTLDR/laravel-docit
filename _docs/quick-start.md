@@ -1,0 +1,44 @@
+---
+title: Quick Start
+navigation:
+  priority: 20
+  group: Getting Started
+---
+
+# Quick Start
+
+## 1. Run the build
+
+```bash
+composer docit
+```
+
+Or run the bin file directly:
+
+```bash
+php vendor/bin/build-docs
+```
+
+For monorepo: `php packages/laravel-docit/bin/build-docs`
+
+## 2. Output
+
+The built site is written to `docs/` in your project root. Commit and push to deploy to GitHub Pages (with the `docs/` folder as the source) or any static host.
+
+## 3. Content structure
+
+Docit uses HydePHP's content directories:
+
+| Directory | Purpose |
+|-----------|---------|
+| `_docs` | Documentation pages (Markdown) |
+| `_pages` | Static pages like index, 404 (Markdown or HTML) |
+| `_posts` | Blog posts (optional) |
+
+Place your Markdown files in `_docs` inside the docit package (or your consuming package). The sidebar order and labels are configured in `config/docs.php`.
+
+## 4. Customization
+
+- **Site name & URL**: `config/hyde.php` or `.env` (`SITE_NAME`, `SITE_URL`)
+- **Sidebar**: `config/docs.php`
+- **Navigation**: `config/hyde.php` → `navigation`

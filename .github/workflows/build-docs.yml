@@ -4,13 +4,13 @@
 # Usage from root workflow:
 #   jobs:
 #     build:
-#       uses: ./packages/docit/.github/workflows/build-docs.yml
+#       uses: ./packages/laravel-docit/.github/workflows/build-docs.yml
 #       with:
-#         docit-path: packages/docit
+#         docit-path: packages/laravel-docit
 #         commit: true
 #
-# For Composer-installed docit (vendor/christhompsontldr/docit):
-#   docit-path: vendor/christhompsontldr/docit
+# For Composer-installed docit (vendor/christhompsontldr/laravel-docit):
+#   docit-path: vendor/christhompsontldr/laravel-docit
 
 name: Build docs (docit)
 
@@ -20,7 +20,7 @@ on:
       docit-path:
         description: 'Path to docit package (relative to repo root)'
         required: false
-        default: 'packages/docit'
+        default: 'packages/laravel-docit'
         type: string
       commit:
         description: 'Commit built docs to the repository'
@@ -52,7 +52,9 @@ jobs:
           fi
 
       - name: Build docs
-        run: php ${{ inputs.docit-path }}/artisan docit
+        env:
+          DOCIT_PROJECT_ROOT: ${{ github.workspace }}
+        run: php ${{ inputs.docit-path }}/bin/build-docs
 
       - name: Add .nojekyll
         run: touch docs/.nojekyll

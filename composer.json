@@ -1,6 +1,6 @@
 {
-    "name": "ChrisThompsonTLDR/Docit",
-    "description": "Static Site Generator to rapidly create Blogs, Documentation Sites, and more, using Markdown and Blade.",
+    "name": "christhompsontldr/laravel-docit",
+    "description": "Static Site Generator to rapidly create Blogs, Documentation Sites, and more, using Markdown.",
     "keywords": [
         "framework",
         "hyde",
@@ -42,6 +42,7 @@
         }
     },
     "scripts": {
+        "docit": "php bin/build-docs --self",
         "post-autoload-dump": [
             "@php -r \"@unlink('./app/storage/framework/cache/packages.php');\"",
             "@php hyde package:discover --ansi"

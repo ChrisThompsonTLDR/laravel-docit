@@ -25,7 +25,7 @@ return [
 
     'sidebar' => [
         // The title in the sidebar header
-        'header' => env('SITE_NAME', 'Laravel RunPod').' Docs',
+        'header' => env('SITE_NAME', 'Docit').' Docs',
 
         // When using a grouped sidebar, should the groups be collapsible?
         'collapsible' => true,
@@ -53,11 +53,9 @@ return [
         'order' => [
             'index',
             'installation',
-            'pods',
-            'serverless',
-            'storage',
-            'guardrails',
-            'artisan-commands',
+            'quick-start',
+            'github-actions',
+            'customization',
         ],
 
         /*
@@ -112,7 +110,7 @@ return [
     |
     */
 
-    // 'source_file_location_base' => 'https://github.com/<user>/<repo>/<[blob/edit]>/<branch>',
+    'source_file_location_base' => 'https://github.com/ChrisThompsonTLDR/laravel-docit/blob/main',
     'edit_source_link_text' => 'Edit Source',
     'edit_source_link_position' => 'footer', // 'header', 'footer', or 'both'
 

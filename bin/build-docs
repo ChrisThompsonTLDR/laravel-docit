@@ -4,10 +4,17 @@
 /**
  * Build the Hyde static site and copy output to the consuming project's docs/ directory.
  * Invoked as vendor/bin/build-docs from the project root.
+ *
+ * When building docit's own docs (dogfooding), use --self or DOCIT_PROJECT_ROOT=. to use
+ * the package directory as the project root.
  */
 
 $packageDir = realpath(dirname(__DIR__));
-$projectRoot = dirname(dirname($packageDir));
+$projectRoot = getenv('DOCIT_PROJECT_ROOT')
+    ? realpath(getenv('DOCIT_PROJECT_ROOT'))
+    : (in_array('--self', $argv ?? [], true)
+        ? $packageDir
+        : dirname(dirname($packageDir)));
 
 $docsDir = $projectRoot . DIRECTORY_SEPARATOR . 'docs';
 

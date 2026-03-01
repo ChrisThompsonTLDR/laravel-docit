@@ -102,7 +102,6 @@ return [
         'Navigation' => \Hyde\Facades\Navigation::class,
         'Routes' => \Hyde\Foundation\Facades\Routes::class,
         'HtmlPage' => \Hyde\Pages\HtmlPage::class,
-        'BladePage' => \Hyde\Pages\BladePage::class,
         'MarkdownPage' => \Hyde\Pages\MarkdownPage::class,
         'MarkdownPost' => \Hyde\Pages\MarkdownPost::class,
         'DocumentationPage' => \Hyde\Pages\DocumentationPage::class,

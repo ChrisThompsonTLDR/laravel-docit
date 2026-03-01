@@ -10,61 +10,49 @@ navigation:
 ## Composer
 
 ```bash
-composer require christhompsontldr/laravel-runpod
+composer require christhompsontldr/laravel-docit
 ```
 
-## Configuration
+## Monorepo
 
-Publish the config file:
+Place the docit package at `packages/laravel-docit` in your repo. Add it as a path repository in your root `composer.json`:
 
-```bash
-php artisan vendor:publish --tag=laravel-runpod-config
+```json
+{
+  "repositories": [
+    {
+      "type": "path",
+      "url": "packages/laravel-docit"
+    }
+  ],
+  "require": {
+    "christhompsontldr/laravel-docit": "@dev"
+  }
+}
 ```
 
-Add the following to `.env`:
+Then run `composer update christhompsontldr/laravel-docit`.
 
-```
-# RunPod API key (from RunPod Settings > API Keys)
-RUNPOD_API_KEY=
+## Add the docit script
 
-# S3-compatible network volume storage
-RUNPOD_S3_ACCESS_KEY=
-RUNPOD_S3_SECRET_KEY=
-RUNPOD_S3_ENDPOINT=https://s3api-eu-ro-1.runpod.io
-RUNPOD_S3_REGION=EU-RO-1
-RUNPOD_NETWORK_VOLUME_ID=
+Add a `docit` script to your repo's `composer.json` so you can run `composer docit`:
 
-# Local path to sync files from (default: storage/app/runpod)
-RUNPOD_LOAD_PATH=
+**Composer-installed:**
 
-# S3 prefix that maps to /workspace/data/ on a pod
-RUNPOD_REMOTE_PREFIX=data
-
-# Pod inactivity timeout in minutes before auto-prune
-RUNPOD_POD_INACTIVITY_MINUTES=2
-
-# Docker image for pod instances
-RUNPOD_POD_IMAGE=
+```json
+{
+  "scripts": {
+    "docit": "php vendor/bin/build-docs"
+  }
+}
 ```
 
-## Templates
+**Monorepo** (docit at `packages/laravel-docit`):
 
-Configure named instances in `config/runpod.php` under `instances`. Each instance can be `type: pod` (persistent, scheduler-based prune) or `type: serverless` (idleTimeout built-in):
-
-```php
-'instances' => [
-    'pymupdf' => [
-        'type' => 'pod',
-        'prune_schedule' => 'everyFiveMinutes',
-        'pod' => [
-            'gpu_count' => 0,
-            'name' => env('RUNPOD_POD_NAME', 'eyejay-pymupdf'),
-            'ports' => env('RUNPOD_POD_PORTS', '8000/http'),
-            'volume_mount_path' => env('RUNPOD_POD_VOLUME_MOUNT', '/workspace'),
-            'env' => [
-                ['key' => 'PYMUPDF_DATA_DIR', 'value' => '/workspace'],
-            ],
-        ],
-    ],
-],
+```json
+{
+  "scripts": {
+    "docit": "php packages/laravel-docit/bin/build-docs"
+  }
+}
 ```

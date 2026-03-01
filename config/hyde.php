@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'name' => env('SITE_NAME', 'Laravel RunPod'),
+    'name' => env('SITE_NAME', 'Docit'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('SITE_URL', 'https://christhompsontldr.github.io/laravel-runpod/'),
+    'url' => env('SITE_URL', 'https://christhompsontldr.github.io/laravel-docit/'),
 
     /*
     |--------------------------------------------------------------------------
@@ -160,7 +160,6 @@ return [
 
     'source_directories' => [
         \Hyde\Pages\HtmlPage::class => '_pages',
-        \Hyde\Pages\BladePage::class => '_pages',
         \Hyde\Pages\MarkdownPage::class => '_pages',
         \Hyde\Pages\MarkdownPost::class => '_posts',
         \Hyde\Pages\DocumentationPage::class => '_docs',
@@ -182,7 +181,6 @@ return [
 
     'output_directories' => [
         \Hyde\Pages\HtmlPage::class => '',
-        \Hyde\Pages\BladePage::class => '',
         \Hyde\Pages\MarkdownPage::class => '',
         \Hyde\Pages\MarkdownPost::class => 'posts',
         \Hyde\Pages\DocumentationPage::class => 'docs',
@@ -256,7 +254,6 @@ return [
         // Page Modules
         Feature::HtmlPages,
         Feature::MarkdownPosts,
-        Feature::BladePages,
         Feature::MarkdownPages,
         Feature::DocumentationPages,
 
@@ -317,7 +314,7 @@ return [
     |
     */
 
-    'footer' => '[Laravel RunPod](https://github.com/christhompsontldr/laravel-runpod) · Built with [HydePHP](https://hydephp.com)',
+    'footer' => '[Docit](https://github.com/ChrisThompsonTLDR/laravel-docit) · Built with [HydePHP](https://hydephp.com)',
 
     /*
     |--------------------------------------------------------------------------
@@ -356,10 +353,8 @@ return [
         ],
 
         // Any extra links you want to add to the navigation menu can be added here.
-        // To get started quickly, you can uncomment the defaults here.
-        // See the documentation link above for more information.
         'custom' => [
-            Navigation::item('https://github.com/christhompsontldr/laravel-runpod', 'GitHub', 200),
+            Navigation::item('https://github.com/ChrisThompsonTLDR/laravel-docit', 'GitHub', 200),
         ],
 
         // How should pages in subdirectories be displayed in the menu?
