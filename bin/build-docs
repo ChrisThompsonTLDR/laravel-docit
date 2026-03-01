@@ -35,8 +35,8 @@ passthru($npmInstall, $code);
 if ($code !== 0) {
     fwrite(STDERR, "Warning: npm install failed, continuing.\n");
 }
-// For GitHub Pages: docs served at /laravel-docit/docs/. Use DOCIT_BASE_PATH to override.
-$basePath = getenv('DOCIT_BASE_PATH') ?: (in_array('--self', $argv ?? [], true) ? '/laravel-docit/docs' : '');
+// For GitHub Pages: docs/ folder is deployment root, site at /laravel-docit/. Use DOCIT_BASE_PATH to override.
+$basePath = getenv('DOCIT_BASE_PATH') ?: (in_array('--self', $argv ?? [], true) ? '/laravel-docit' : '');
 $npmBuild = $basePath !== '' ? "BASE_PATH=" . escapeshellarg($basePath) . " npm run build" : 'npm run build';
 passthru($npmBuild, $code);
 if ($code !== 0) {
