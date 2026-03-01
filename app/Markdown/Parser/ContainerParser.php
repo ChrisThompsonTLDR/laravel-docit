@@ -18,6 +18,8 @@ final class ContainerParser extends AbstractBlockContinueParser
     /** @var ArrayCollection<string> */
     private ArrayCollection $lines;
 
+    private int $nesting = 1;
+
     public function __construct(ContainerBlock $block)
     {
         $this->block = $block;
@@ -32,8 +34,17 @@ final class ContainerParser extends AbstractBlockContinueParser
     public function tryContinue(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): ?BlockContinue
     {
         $line = trim($cursor->getLine());
+
         if ($line === ':::') {
-            return BlockContinue::finished();
+            $this->nesting--;
+            if ($this->nesting <= 0) {
+                return BlockContinue::finished();
+            }
+            return BlockContinue::at($cursor);
+        }
+
+        if (preg_match('/^:::(\s+)([\w-]+)/', $line)) {
+            $this->nesting++;
         }
 
         return BlockContinue::at($cursor);

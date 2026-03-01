@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Commands\DocitCommand;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Config::set('hyde.footer', false);
+
         $this->commands([
             DocitCommand::class,
         ]);

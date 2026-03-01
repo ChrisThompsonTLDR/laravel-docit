@@ -1,5 +1,12 @@
 @if(! $sidebar->hasGroups())
     <ul id="sidebar-items" role="list" class="pl-2">
+        @php
+            $guideItem = \Hyde\Framework\Features\Navigation\NavigationItem::create(
+                \Hyde\Pages\DocumentationPage::home(),
+                config('docs.sidebar.labels.' . \Hyde\Pages\DocumentationPage::homeRouteName(), 'Guide')
+            );
+        @endphp
+        @include('hyde::components.docs.sidebar-item', ['item' => $guideItem])
         @foreach ($sidebar->getItems() as $item)
             @include('hyde::components.docs.sidebar-item')
         @endforeach

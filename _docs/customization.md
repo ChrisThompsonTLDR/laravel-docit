@@ -2,7 +2,6 @@
 title: Customization
 navigation:
   priority: 40
-  group: Configuration
 ---
 
 # Customization

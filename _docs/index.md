@@ -2,7 +2,6 @@
 title: Introduction
 navigation:
   priority: 1
-  group: Getting Started
 ---
 
 # Docit

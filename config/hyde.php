@@ -297,24 +297,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Footer Text
-    |--------------------------------------------------------------------------
-    |
-    | Here you can customize the footer Markdown text for your site.
-    |
-    | If you don't want to write Markdown here, you can use a Markdown include.
-    | You can also customize the Blade view if you want a more complex footer.
-    | You can disable it completely by changing the setting to `false`.
-    |
-    | To read about the many configuration options here, visit:
-    | https://hydephp.com/docs/1.x/customization#footer
-    |
-    */
-
-    'footer' => '[Docit](https://github.com/ChrisThompsonTLDR/laravel-docit) · Built with [HydePHP](https://hydephp.com)',
-
-    /*
-    |--------------------------------------------------------------------------
     | Navigation Menu Configuration
     |--------------------------------------------------------------------------
     |
@@ -351,7 +333,7 @@ return [
 
         // Any extra links you want to add to the navigation menu can be added here.
         'custom' => [
-            Navigation::item('https://github.com/ChrisThompsonTLDR/laravel-docit', 'GitHub', 200),
+            Navigation::item('https://github.com/ChrisThompsonTLDR/laravel-docit', 'GitHub', 200, ['icon' => 'github']),
         ],
 
         // How should pages in subdirectories be displayed in the menu?

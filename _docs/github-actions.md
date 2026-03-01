@@ -2,7 +2,6 @@
 title: GitHub Actions
 navigation:
   priority: 30
-  group: Deployment
 ---
 
 # GitHub Actions

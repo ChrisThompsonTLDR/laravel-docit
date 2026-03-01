@@ -69,7 +69,7 @@ return [
         */
 
         'labels' => [
-            \Hyde\Pages\DocumentationPage::homeRouteName() => 'Docs',
+            \Hyde\Pages\DocumentationPage::homeRouteName() => 'Guide',
         ],
 
         /*

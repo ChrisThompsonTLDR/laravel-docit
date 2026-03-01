@@ -2,7 +2,7 @@
 title: Installation
 navigation:
   priority: 10
-  group: Getting Started
+  hidden: true
 ---
 
 # Installation

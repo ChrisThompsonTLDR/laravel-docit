@@ -2,7 +2,7 @@
 title: Quick Start
 navigation:
   priority: 20
-  group: Getting Started
+  hidden: true
 ---
 
 # Quick Start
