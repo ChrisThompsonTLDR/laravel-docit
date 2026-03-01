@@ -2,11 +2,11 @@
 <?php
 
 /**
- * Build the Hyde static site and copy output to the consuming project's docs/ directory.
- * Invoked as vendor/bin/build-docs from the project root.
+ * Build the Docit static site using Protocol UI.
+ * Data source: _docs. UI: protocol-js (100% Protocol).
  *
- * When building docit's own docs (dogfooding), use --self or DOCIT_PROJECT_ROOT=. to use
- * the package directory as the project root.
+ * Invoked as vendor/bin/build-docs from the project root.
+ * For dogfooding: DOCIT_PROJECT_ROOT=. or --self
  */
 
 $packageDir = realpath(dirname(__DIR__));
@@ -20,39 +20,33 @@ $docsDir = $projectRoot . DIRECTORY_SEPARATOR . 'docs';
 
 chdir($packageDir);
 
-// Install PHP dependencies (required for hyde binary)
-$composerCmd = 'composer install --no-interaction';
-passthru($composerCmd, $code);
+// 1. Sync _docs to protocol-js
+$syncCmd = 'node scripts/sync-docs-to-protocol.js';
+passthru($syncCmd, $code);
 if ($code !== 0) {
-    fwrite(STDERR, "Error: composer install failed.\n");
+    fwrite(STDERR, "Error: sync-docs-to-protocol failed.\n");
     exit(1);
 }
 
-// Build assets
-$npmCmd = 'npm ci 2>/dev/null || npm install';
-$npmBuild = 'npm run build';
-passthru($npmCmd, $code);
+// 2. Build Protocol (Next.js)
+chdir($packageDir . DIRECTORY_SEPARATOR . 'protocol-js');
+$npmInstall = 'npm ci 2>/dev/null || npm install';
+passthru($npmInstall, $code);
 if ($code !== 0) {
-    fwrite(STDERR, "Warning: npm ci failed, trying npm run build anyway.\n");
+    fwrite(STDERR, "Warning: npm install failed, continuing.\n");
 }
+$basePath = getenv('DOCIT_BASE_PATH') ?: '';
+$npmBuild = $basePath !== '' ? "BASE_PATH={$basePath} npm run build" : 'npm run build';
 passthru($npmBuild, $code);
 if ($code !== 0) {
-    fwrite(STDERR, "Error: npm run build failed.\n");
+    fwrite(STDERR, "Error: Protocol build failed.\n");
     exit(1);
 }
 
-// Build Hyde site (use package's hyde binary)
-$hydeCmd = 'php hyde build --pretty-urls --no-interaction';
-passthru($hydeCmd, $code);
-if ($code !== 0) {
-    fwrite(STDERR, "Error: hyde build failed.\n");
-    exit(1);
-}
-
-// Copy _site to docs/
-$siteDir = $packageDir . DIRECTORY_SEPARATOR . '_site';
-if (!is_dir($siteDir)) {
-    fwrite(STDERR, "Error: _site directory not found after build.\n");
+// 3. Copy Protocol output (out/) to docs/
+$outDir = $packageDir . DIRECTORY_SEPARATOR . 'protocol-js' . DIRECTORY_SEPARATOR . 'out';
+if (!is_dir($outDir)) {
+    fwrite(STDERR, "Error: protocol-js/out not found after build.\n");
     exit(1);
 }
 
@@ -82,7 +76,7 @@ if (is_dir($docsDir)) {
 }
 
 $iterator = new RecursiveIteratorIterator(
-    new RecursiveDirectoryIterator($siteDir, RecursiveDirectoryIterator::SKIP_DOTS),
+    new RecursiveDirectoryIterator($outDir, RecursiveDirectoryIterator::SKIP_DOTS),
     RecursiveIteratorIterator::SELF_FIRST
 );
 
@@ -101,70 +95,8 @@ foreach ($iterator as $item) {
     }
 }
 
-// Apply security and accessibility patches to search.html (duplicate IDs, RegExp escaping)
-$searchHtmlPath = $docsDir . DIRECTORY_SEPARATOR . 'docs' . DIRECTORY_SEPARATOR . 'search.html';
-if (file_exists($searchHtmlPath)) {
-    $html = file_get_contents($searchHtmlPath);
-    // Fix duplicate IDs: inline block (first occurrence only)
-    $html = preg_replace(
-        '#<div id="hyde-search" x-data="hydeSearch">\s*<template id="search-highlight-template">#',
-        '<div id="hyde-search-inline" x-data="hydeSearch">' . "\n    " . '<template id="search-highlight-template-inline">',
-        $html,
-        1
-    );
-    $html = preg_replace(
-        '#id="search-input" x-model="searchTerm" @input="search\(\)" placeholder="Search\.\.\." autocomplete="off" autofocus\s+class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3 max-w-sm"#',
-        'id="search-input-inline" x-model="searchTerm" @input="search()" placeholder="Search..." autocomplete="off" autofocus' . "\n                " . 'class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3 max-w-sm"',
-        $html,
-        1
-    );
-    // Fix duplicate IDs: modal block (second occurrence - no max-w-sm)
-    $html = preg_replace(
-        '#<div id="hyde-search" x-data="hydeSearch">\s*<template id="search-highlight-template">#',
-        '<div id="hyde-search-modal" x-data="hydeSearch">' . "\n    " . '<template id="search-highlight-template-modal">',
-        $html,
-        1
-    );
-    $html = preg_replace(
-        '#id="search-input" x-model="searchTerm" @input="search\(\)" placeholder="Search\.\.\." autocomplete="off" autofocus\s+class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3"#',
-        'id="search-input-modal" x-model="searchTerm" @input="search()" placeholder="Search..." autocomplete="off" autofocus' . "\n                " . 'class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3"',
-        $html,
-        1
-    );
-    $html = str_replace("document.getElementById('search-input').focus()", "document.getElementById('search-input-modal').focus()", $html);
-    // Add escapeRegExp and fix RegExp usage
-    $escapeRegExp = "function escapeRegExp(string) {\n    return string.replace(/[.*+?^\\\${}()|[\\]\\\\]/g, '\\\\\\\\\$&');\n}\n\n";
-    $html = str_replace(
-        "function initHydeSearch(searchIndexUrl) {\n    return {",
-        $escapeRegExp . "function initHydeSearch(searchIndexUrl) {\n    return {",
-        $html
-    );
-    $html = str_replace(
-        "const searchResults = this.searchIndex.filter(entry =>",
-        "const escapedTerm = escapeRegExp(this.searchTerm);\n            const searchResults = this.searchIndex.filter(entry =>",
-        $html
-    );
-    $html = str_replace(
-        "new RegExp(this.searchTerm, 'gi')",
-        "new RegExp(escapedTerm, 'gi')",
-        $html
-    );
-    $html = str_replace(
-        'this.getSearchContext(result.content)',
-        'this.getSearchContext(result.content, escapedTerm)',
-        $html
-    );
-    $html = str_replace(
-        "getSearchContext(content) {",
-        "getSearchContext(content, escapedTerm) {",
-        $html
-    );
-    $html = str_replace(
-        "const template = document.getElementById('search-highlight-template');",
-        "const template = this.\$el.querySelector('template');",
-        $html
-    );
-    file_put_contents($searchHtmlPath, $html);
-}
+// 4. Add .nojekyll for GitHub Pages
+$nojekyll = $docsDir . DIRECTORY_SEPARATOR . '.nojekyll';
+touch($nojekyll);
 
 echo "Docs built successfully to {$docsDir}\n";

@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
+import { showSignIn } from '@/config/docit-navigation'
 import { Button } from '@/components/Button'
 import { Logo } from '@/components/Logo'
 import {
@@ -80,9 +81,11 @@ export const Header = forwardRef(function Header({ className, ...props }, ref) {
           <MobileSearch />
           <ThemeToggle />
         </div>
-        <div className="hidden min-[416px]:contents">
-          <Button href="#">Sign in</Button>
-        </div>
+        {showSignIn && (
+          <div className="hidden min-[416px]:contents">
+            <Button href="#">Sign in</Button>
+          </div>
+        )}
       </div>
     </motion.div>
   )

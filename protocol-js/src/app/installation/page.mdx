@@ -1,0 +1,58 @@
+export const metadata = {
+  title: 'Installation',
+  description: 'Docit documentation',
+}
+
+
+# Installation
+
+## Composer
+
+```bash
+composer require christhompsontldr/laravel-docit
+```
+
+## Monorepo
+
+Place the docit package at `packages/laravel-docit` in your repo. Add it as a path repository in your root `composer.json`:
+
+```json
+{
+  "repositories": [
+    {
+      "type": "path",
+      "url": "packages/laravel-docit"
+    }
+  ],
+  "require": {
+    "christhompsontldr/laravel-docit": "@dev"
+  }
+}
+```
+
+Then run `composer update christhompsontldr/laravel-docit`.
+
+## Add the docit script
+
+Add a `docit` script to your repo's `composer.json` so you can run `composer docit`:
+
+**Composer-installed:**
+
+```json
+{
+  "scripts": {
+    "docit": "php vendor/bin/build-docs"
+  }
+}
+```
+
+**Monorepo** (docit at `packages/laravel-docit`):
+
+```json
+{
+  "scripts": {
+    "docit": "php packages/laravel-docit/bin/build-docs"
+  }
+}
+```
+

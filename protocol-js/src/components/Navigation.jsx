@@ -194,38 +194,19 @@ function NavigationGroup({ group, className }) {
   )
 }
 
-export const navigation = [
-  {
-    title: 'Guides',
-    links: [
-      { title: 'Introduction', href: '/' },
-      { title: 'Quickstart', href: '/quickstart' },
-      { title: 'SDKs', href: '/sdks' },
-      { title: 'Authentication', href: '/authentication' },
-      { title: 'Pagination', href: '/pagination' },
-      { title: 'Errors', href: '/errors' },
-      { title: 'Webhooks', href: '/webhooks' },
-    ],
-  },
-  {
-    title: 'Resources',
-    links: [
-      { title: 'Contacts', href: '/contacts' },
-      { title: 'Conversations', href: '/conversations' },
-      { title: 'Messages', href: '/messages' },
-      { title: 'Groups', href: '/groups' },
-      { title: 'Attachments', href: '/attachments' },
-    ],
-  },
-]
+import { navigation as docitNav, topLevelNavItems as docitTopNav, showSignIn as docitShowSignIn } from '@/config/docit-navigation'
+
+export const navigation = docitNav
+export const topLevelNavItems = docitTopNav
+export const showSignIn = docitShowSignIn
 
 export function Navigation(props) {
   return (
     <nav {...props}>
       <ul role="list">
-        <TopLevelNavItem href="/">API</TopLevelNavItem>
-        <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
-        <TopLevelNavItem href="#">Support</TopLevelNavItem>
+        {topLevelNavItems.map(({ href, children }) => (
+          <TopLevelNavItem key={href} href={href}>{children}</TopLevelNavItem>
+        ))}
         {navigation.map((group, groupIndex) => (
           <NavigationGroup
             key={group.title}
@@ -233,11 +214,13 @@ export function Navigation(props) {
             className={groupIndex === 0 ? 'md:mt-0' : ''}
           />
         ))}
-        <li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
-          <Button href="#" variant="filled" className="w-full">
-            Sign in
-          </Button>
-        </li>
+        {showSignIn && (
+          <li className="sticky bottom-0 z-10 mt-6 min-[416px]:hidden">
+            <Button href="#" variant="filled" className="w-full">
+              Sign in
+            </Button>
+          </li>
+        )}
       </ul>
     </nav>
   )
