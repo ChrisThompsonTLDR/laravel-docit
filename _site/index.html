@@ -22,7 +22,7 @@
 <style>[x-cloak] {display: none!important}</style>
 
 
-            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=21e94728">
+            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=c724cc46">
     
 
     
@@ -36,17 +36,17 @@
 
 
 
-<link rel="preconnect" href="https://fonts.bunny.net"><link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.bunny.net"><link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
 
 </head>
-<body id="app" class="flex flex-col min-h-screen overflow-x-hidden dark:bg-gray-900 dark:text-white" x-data="{ navigationOpen: false }" x-on:keydown.escape="navigationOpen = false;">
-    <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>    <nav aria-label="Main navigation" id="main-navigation" class="flex flex-wrap items-center justify-between p-4 shadow-lg sm:shadow-xl md:shadow-none dark:bg-gray-800">
-    <div id="main-navigation-brand" class="flex grow items-center shrink-0 text-gray-700 dark:text-gray-200">
+<body id="app" class="flex flex-col min-h-screen overflow-x-hidden dark:bg-zinc-900 dark:text-zinc-100" x-data="{ navigationOpen: false }" x-on:keydown.escape="navigationOpen = false;">
+    <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>    <nav aria-label="Main navigation" id="main-navigation" class="flex flex-wrap items-center justify-between p-4 shadow-lg sm:shadow-xl md:shadow-none dark:bg-zinc-900 border-b border-zinc-900/10 dark:border-white/10">
+    <div id="main-navigation-brand" class="flex grow items-center shrink-0 text-zinc-700 dark:text-zinc-200">
         <a href="./" class="font-bold px-4" aria-label="Home page">
     Docit
 </a>
         <div class="ml-auto">
-            <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-gray-700 dark:text-gray-200" title="Toggle theme">
+            <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-zinc-700 dark:hover:text-zinc-200" title="Toggle theme">
         <span class="sr-only">Toggle dark theme</span>
         <svg width="1.25rem" height="1.25rem" class="w-5 h-5 hidden dark:block" fill="#FFFFFF" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
         <svg width="1.25rem" height="1.25rem" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -55,9 +55,9 @@
     </div>
 
     <div class="block md:hidden">
-        <button id="navigation-toggle-button" class="flex items-center px-3 py-1 hover:text-gray-700 dark:text-gray-200"
+        <button id="navigation-toggle-button" class="flex items-center px-3 py-1 hover:text-zinc-700 dark:hover:text-zinc-200"
                 aria-label="Toggle navigation menu" @click="navigationOpen = ! navigationOpen">
-            <svg x-show="! navigationOpen" title="Open Navigation Menu" class="dark:fill-gray-200"
+            <svg x-show="! navigationOpen" title="Open Navigation Menu" class="dark:fill-zinc-200"
                  style="display: block;"
                  id="open-main-navigation-menu-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
                  width="24">
@@ -65,7 +65,7 @@
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
             </svg>
-            <svg x-show="navigationOpen" title="Close Navigation Menu" class="dark:fill-gray-200" style="display: none;"
+            <svg x-show="navigationOpen" title="Close Navigation Menu" class="dark:fill-zinc-200" style="display: none;"
                  id="close-main-navigation-menu-icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24"
                  width="24">
                 <title>Close Menu</title>
@@ -76,27 +76,27 @@
     </div>
 
     <div id="main-navigation-links" 
-         class="w-full hidden md:flex grow md:grow-0 md:items-center md:w-auto px-6 -mx-4 border-t mt-3 pt-3 md:border-none md:mt-0 md:py-0 border-gray-200 dark:border-gray-700"
+         class="w-full hidden md:flex grow md:grow-0 md:items-center md:w-auto px-6 -mx-4 border-t mt-3 pt-3 md:border-none md:mt-0 md:py-0 border-zinc-900/10 dark:border-white/10"
          :class="navigationOpen ? 'block!' : ''">
         <ul aria-label="Navigation links" class="md:grow md:flex justify-end">
                             <li class="md:mx-2">
-                                            <a href="./" aria-current="page" class="navigation-link block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100 navigation-link-active border-l-4 border-indigo-500 md:border-none font-medium -ml-6 pl-5 md:ml-0 md:pl-0 bg-gray-100 dark:bg-gray-800 md:bg-transparent dark:md:bg-transparent">Home</a>                                    </li>
+                                            <a href="./" aria-current="page" class="navigation-link block my-2 md:my-0 md:inline-block py-1 text-zinc-700 hover:text-zinc-900 dark:text-zinc-100 dark:hover:text-white navigation-link-active border-l-4 border-emerald-500 md:border-none font-medium -ml-6 pl-5 md:ml-0 md:pl-0 bg-zinc-100 dark:bg-zinc-800 md:bg-transparent dark:md:bg-transparent">Home</a>                                    </li>
                             <li class="md:mx-2">
                                             <div class="dropdown-container relative" x-data="{ open: false }">
-    <button class="dropdown-button block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100"
+    <button class="dropdown-button block my-2 md:my-0 md:inline-block py-1 text-zinc-700 hover:text-zinc-900 dark:text-zinc-100 dark:hover:text-white"
             x-on:click="open = ! open" @click.outside="open = false" @keydown.escape.window="open = false">
         Getting Started
         <svg class="inline transition-all dark:fill-white" x-bind:style="open ? { transform: 'rotate(180deg)' } : ''" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg>
     </button>
-    <div class="dropdown absolute shadow-lg bg-white dark:bg-gray-700 z-50 right-0" :class="open ? '' : 'hidden'" x-cloak="">
+    <div class="dropdown absolute shadow-lg bg-white dark:bg-zinc-800 border border-zinc-900/10 dark:border-white/10 z-50 right-0" :class="open ? '' : 'hidden'" x-cloak="">
         <ul class="dropdown-items px-3 py-2">
                                                 <li class="whitespace-nowrap">
-                        <a href="docs/" class="navigation-link block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100">Docs</a>                    </li>
+                        <a href="docs/" class="navigation-link block my-2 md:my-0 md:inline-block py-1 text-zinc-700 hover:text-zinc-900 dark:text-zinc-100 dark:hover:text-white">Docs</a>                    </li>
                                     </ul>
     </div>
 </div>                                    </li>
                             <li class="md:mx-2">
-                                            <a href="https://github.com/ChrisThompsonTLDR/laravel-docit" class="navigation-link block my-2 md:my-0 md:inline-block py-1 text-gray-700 hover:text-gray-900 dark:text-gray-100">GitHub</a>                                    </li>
+                                            <a href="https://github.com/ChrisThompsonTLDR/laravel-docit" class="navigation-link block my-2 md:my-0 md:inline-block py-1 text-zinc-700 hover:text-zinc-900 dark:text-zinc-100 dark:hover:text-white">GitHub</a>                                    </li>
                     </ul>
     </div>
 </nav>
@@ -109,18 +109,10 @@
 <p><a href="docs/installation">Get Started</a> · <a href="https://github.com/ChrisThompsonTLDR/laravel-docit">View on GitHub</a></p>
 <h2>Features</h2>
 <ul>
-<li>
-<p><strong><a href="docs/installation">Installation</a></strong> – Composer or monorepo. Add the <code>docit</code> script and run <code>composer docit</code>.</p>
-</li>
-<li>
-<p><strong><a href="docs/quick-start">Quick Start</a></strong> – Build, output to <code>docs/</code>, and deploy. Content lives in <code>_docs</code> and <code>_pages</code>.</p>
-</li>
-<li>
-<p><strong><a href="docs/github-actions">GitHub Actions</a></strong> – Reusable workflow for build-and-deploy on push.</p>
-</li>
-<li>
-<p><strong><a href="docs/customization">Customization</a></strong> – Site name, sidebar, navigation, and more via Hyde config.</p>
-</li>
+<li><strong><a href="docs/installation">Installation</a></strong> – Composer or monorepo. Add the <code>docit</code> script and run <code>composer docit</code>.</li>
+<li><strong><a href="docs/quick-start">Quick Start</a></strong> – Build, output to <code>docs/</code>, and deploy. Content lives in <code>_docs</code> and <code>_pages</code>.</li>
+<li><strong><a href="docs/github-actions">GitHub Actions</a></strong> – Reusable workflow for build-and-deploy on push.</li>
+<li><strong><a href="docs/customization">Customization</a></strong> – Site name, sidebar, navigation, and more via Hyde config.</li>
 </ul>
 
         </article>
@@ -128,13 +120,13 @@
 
     </section>
 
-    <footer aria-label="Page footer" class="flex py-4 px-6 w-full text-center mt-auto bg-slate-100 dark:bg-gray-800">
+    <footer aria-label="Page footer" class="flex py-4 px-6 w-full text-center mt-auto bg-zinc-100 dark:bg-zinc-900 border-t border-zinc-900/10 dark:border-white/10">
         <div class="prose dark:prose-invert text-center mx-auto">
             <p><a href="https://github.com/ChrisThompsonTLDR/laravel-docit">Docit</a> · Built with <a href="https://hydephp.com">HydePHP</a></p>
         </div>
         <a href="#app" aria-label="Go to top of page" class="float-right">
             <button title="Scroll to top">
-                <svg width="1.5rem" height="1.5rem" role="presentation" class="fill-current text-gray-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <svg width="1.5rem" height="1.5rem" role="presentation" class="fill-current text-zinc-500 h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
                 </svg>
             </button>

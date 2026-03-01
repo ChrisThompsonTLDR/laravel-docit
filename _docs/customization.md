@@ -42,3 +42,21 @@ In `config/hyde.php`, the `navigation` key controls the main nav:
 ## Content directories
 
 By default, docs live in `_docs`, pages in `_pages`. These are configured in `config/hyde.php` under `source_directories` and `output_directories`.
+
+## Custom containers (cards)
+
+Docit adds a Markdown extension for VitePress-style custom containers. Use `::: card` and `::: card-grid` for card layouts:
+
+```md
+::: card-grid
+::: card Installation docs/installation
+Composer or monorepo. Add the `docit` script and run `composer docit`.
+:::
+::: card Quick Start docs/quick-start
+Build, output to `docs/`, and deploy.
+:::
+:::
+```
+
+- **`::: card Title url`** – A single card. Optional `url` makes the card a link.
+- **`::: card-grid`** – Wraps cards in a responsive grid (2 cols on sm, 3 on lg).

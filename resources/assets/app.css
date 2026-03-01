@@ -11,9 +11,8 @@
 * See https://hydephp.com/docs/1.x/managing-assets#loading-from-cdn
 */
 
-@import 'hydefront/components/torchlight.css' layer(base);
-
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 @source "../../_pages/**/*.md";
 @source "../../_pages/**/*.html";
@@ -24,3 +23,36 @@
 }
 
 @config '../../tailwind.config.js';
+
+/* Protocol-js inspired prose: zinc neutrals, emerald accents */
+@layer components {
+    .prose {
+        --tw-prose-body: #3f3f46;
+        --tw-prose-headings: #18181b;
+        --tw-prose-links: #10b981;
+        --tw-prose-links-hover: #059669;
+        --tw-prose-bold: #18181b;
+        --tw-prose-counters: #71717a;
+        --tw-prose-bullets: #d4d4d8;
+        --tw-prose-quotes: #18181b;
+        --tw-prose-quote-borders: #e4e4e7;
+        --tw-prose-code: #18181b;
+        --tw-prose-code-bg: #f4f4f5;
+        --tw-prose-code-ring: #d4d4d8;
+    }
+    .dark .prose,
+    .prose.dark {
+        --tw-prose-body: #a1a1aa;
+        --tw-prose-headings: #ffffff;
+        --tw-prose-links: #34d399;
+        --tw-prose-links-hover: #10b981;
+        --tw-prose-bold: #ffffff;
+        --tw-prose-counters: #a1a1aa;
+        --tw-prose-bullets: #52525b;
+        --tw-prose-quotes: #f4f4f5;
+        --tw-prose-quote-borders: #3f3f46;
+        --tw-prose-code: #ffffff;
+        --tw-prose-code-bg: rgb(63 63 70 / 0.15);
+        --tw-prose-code-ring: rgb(255 255 255 / 0.1);
+    }
+}

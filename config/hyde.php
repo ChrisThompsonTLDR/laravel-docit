@@ -235,7 +235,7 @@ return [
     */
 
     // Add any extra HTML to include in the <head> tag
-    'head' => '<link rel="preconnect" href="https://fonts.bunny.net"><link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />',
+    'head' => '<link rel="preconnect" href="https://fonts.bunny.net"><link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />',
 
     // Add any extra HTML to include before the closing <body> tag
     'scripts' => '',
@@ -260,9 +260,6 @@ return [
         // Frontend Features
         Feature::Darkmode,
         Feature::DocumentationSearch,
-
-        // Integrations
-        Feature::Torchlight,
     ],
 
     /*

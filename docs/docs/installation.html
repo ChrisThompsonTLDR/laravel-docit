@@ -22,7 +22,7 @@
 <style>[x-cloak] {display: none!important}</style>
 
 
-            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=21e94728">
+            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=c724cc46">
     
 
     
@@ -36,13 +36,13 @@
 
 
 
-<link rel="preconnect" href="https://fonts.bunny.net"><link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.bunny.net"><link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
 
 </head>
-<body id="hyde-docs" class="bg-white dark:bg-gray-900 dark:text-white min-h-screen w-screen relative overflow-x-hidden overflow-y-auto"
+<body id="hyde-docs" class="bg-white dark:bg-zinc-900 dark:text-zinc-100 min-h-screen w-screen relative overflow-x-hidden overflow-y-auto"
       x-data="{ sidebarOpen: false, searchWindowOpen: false }" x-on:keydown.escape="searchWindowOpen = false; sidebarOpen = false" x-on:keydown.slash="searchWindowOpen = true">
 
-    <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>    <nav id="mobile-navigation" class="bg-white dark:bg-gray-800 md:hidden flex justify-between w-full h-16 z-40 fixed left-0 top-0 p-4 leading-8 shadow-lg print:hidden">
+    <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>    <nav id="mobile-navigation" class="bg-white dark:bg-zinc-900 border-b border-zinc-900/10 dark:border-white/10 md:hidden flex justify-between w-full h-16 z-40 fixed left-0 top-0 p-4 leading-8 shadow-lg print:hidden">
     <strong class="px-2 mr-auto">
                     <a href="../docs/">
                 Docit Docs
@@ -50,7 +50,7 @@
             </strong>
     <ul class="flex items-center">
         <li class="h-8 flex mr-1">
-            <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-gray-700 dark:text-gray-200 opacity-75 hover:opacity-100" title="Toggle theme">
+            <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-zinc-700 dark:hover:text-zinc-200 opacity-75 hover:opacity-100" title="Toggle theme">
         <span class="sr-only">Toggle dark theme</span>
         <svg width="1.25rem" height="1.25rem" class="w-5 h-5 hidden dark:block" fill="#FFFFFF" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
         <svg width="1.25rem" height="1.25rem" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -62,7 +62,7 @@
     title="Toggle sidebar" 
     aria-label="Toggle sidebar navigation menu"
     @click="sidebarOpen = !sidebarOpen"
-    class="flex items-center justify-center w-8 h-8 px-2 py-1 hover:text-gray-700 dark:text-gray-200 opacity-75 hover:opacity-100"
+    class="flex items-center justify-center w-8 h-8 px-2 py-1 hover:text-zinc-700 dark:hover:text-zinc-200 opacity-75 hover:opacity-100"
   >
     <div class="relative w-5 h-4">
         <div class="absolute top-0 w-5 h-0.5 bg-current transition-all duration-300 ease-in-out" :class="sidebarOpen ? 'opacity-0' : ''"></div>
@@ -72,7 +72,7 @@
     </div>
 </button>        </li>
     </ul>
-</nav>    <aside id="sidebar" x-cloak :class="sidebarOpen ? 'visible left-0' : 'invisible -left-64 md:visible md:left-0'" class="bg-gray-100 dark:bg-gray-800 dark:text-gray-200 h-screen w-64 fixed z-30 md:flex flex-col shadow-lg md:shadow-none transition-all duration-300">
+</nav>    <aside id="sidebar" x-cloak :class="sidebarOpen ? 'visible left-0' : 'invisible -left-64 md:visible md:left-0'" class="bg-white dark:bg-zinc-900 dark:text-zinc-200 h-screen w-64 lg:w-72 xl:w-80 fixed z-30 md:flex flex-col shadow-lg md:shadow-none border-r border-zinc-900/10 dark:border-white/10 transition-all duration-300">
     <header id="sidebar-header" class="h-16">
         <div id="sidebar-brand" class="flex items-center justify-between h-16 py-4 px-2">
     <strong class="px-2">
@@ -80,17 +80,17 @@
                 Docit Docs
             </a>
             </strong>
-    <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-gray-700 dark:text-gray-200 opacity-75 hover:opacity-100" title="Toggle theme">
+    <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-zinc-700 dark:hover:text-zinc-200 opacity-75 hover:opacity-100" title="Toggle theme">
         <span class="sr-only">Toggle dark theme</span>
         <svg width="1.25rem" height="1.25rem" class="w-5 h-5 hidden dark:block" fill="#FFFFFF" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
         <svg width="1.25rem" height="1.25rem" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
     </button>
 </div>    </header>
-    <nav id="sidebar-navigation" class="p-2 overflow-y-auto border-y border-gray-300 dark:border-[#1b2533] h-full">
+    <nav id="sidebar-navigation" class="p-2 overflow-y-auto border-y border-zinc-900/10 dark:border-white/10 h-full">
         <ul id="sidebar-items" role="list">
                             <li class="sidebar-group" role="listitem"  x-data="{ groupOpen: true }" >
-                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-black/10"  @click="groupOpen = ! groupOpen" >
-                    <h4 class="sidebar-group-heading text-base font-semibold cursor-pointer dark:group-hover:text-white">Getting Started</h4>
+                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-zinc-900/10 dark:hover:bg-white/10"  @click="groupOpen = ! groupOpen" >
+                    <h4 class="sidebar-group-heading text-base font-semibold text-zinc-900 dark:text-white cursor-pointer dark:group-hover:text-white">Getting Started</h4>
                                             <button class="sidebar-group-toggle opacity-50 group-hover:opacity-100">
     <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-open" x-show="groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 12L12 8L4 8L8 12Z" fill="currentColor" />
@@ -100,29 +100,29 @@
     </svg>
 </button>                                    </header>
                 <ul class="sidebar-group-items ml-4 px-2 mb-2" role="list"  x-show="groupOpen" >
-                                            <li class="sidebar-item -ml-4 pl-4 active -ml-8 pl-8 bg-black/5 dark:bg-black/10" role="listitem">
-            <a href="../docs/installation" aria-current="true" class="-ml-8 pl-4 py-1 px-2 block text-indigo-600 dark:text-indigo-400 dark:font-medium border-l-[0.325rem] border-indigo-500 transition-colors duration-300 ease-in-out hover:bg-black/10">
+                                            <li class="sidebar-item -ml-4 pl-4 active -ml-8 pl-8 bg-zinc-900/5 dark:bg-white/5" role="listitem">
+            <a href="../docs/installation" aria-current="true" class="-ml-8 pl-4 py-1 px-2 block text-emerald-600 dark:text-emerald-400 dark:font-medium border-l-[0.325rem] border-emerald-500 transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10">
             Installation
         </a>
 
                     <span class="sr-only">Table of contents</span>
             <ul class="table-of-contents pb-3">
                     <li class="my-0.5">
-                                    <a href="#composer" class="-ml-8 pl-8 opacity-80 hover:opacity-100 hover:bg-gray-200/20 transition-all duration-300">
+                                    <a href="#composer" class="-ml-8 pl-8 opacity-80 hover:opacity-100 hover:bg-zinc-900/10 dark:hover:bg-white/10 transition-all duration-300">
                         <span class="text-[75%] opacity-50 hover:opacity-100 transition-opacity duration-300">#</span>
                         Composer
                     </a>
                 
                             </li>
                     <li class="my-0.5">
-                                    <a href="#monorepo" class="-ml-8 pl-8 opacity-80 hover:opacity-100 hover:bg-gray-200/20 transition-all duration-300">
+                                    <a href="#monorepo" class="-ml-8 pl-8 opacity-80 hover:opacity-100 hover:bg-zinc-900/10 dark:hover:bg-white/10 transition-all duration-300">
                         <span class="text-[75%] opacity-50 hover:opacity-100 transition-opacity duration-300">#</span>
                         Monorepo
                     </a>
                 
                             </li>
                     <li class="my-0.5">
-                                    <a href="#add-the-docit-script" class="-ml-8 pl-8 opacity-80 hover:opacity-100 hover:bg-gray-200/20 transition-all duration-300">
+                                    <a href="#add-the-docit-script" class="-ml-8 pl-8 opacity-80 hover:opacity-100 hover:bg-zinc-900/10 dark:hover:bg-white/10 transition-all duration-300">
                         <span class="text-[75%] opacity-50 hover:opacity-100 transition-opacity duration-300">#</span>
                         Add the docit script
                     </a>
@@ -130,14 +130,14 @@
                             </li>
             </ul>
             </li>                                            <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/quick-start" class="-ml-8 pl-4 py-1 px-2 block border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-black/10">
+            <a href="../docs/quick-start" class="-ml-8 pl-4 py-1 px-2 block text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white">
             Quick Start
         </a>
     </li>                                    </ul>
             </li>
                     <li class="sidebar-group" role="listitem"  x-data="{ groupOpen: false }" >
-                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-black/10"  @click="groupOpen = ! groupOpen" >
-                    <h4 class="sidebar-group-heading text-base font-semibold cursor-pointer dark:group-hover:text-white">Deployment</h4>
+                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-zinc-900/10 dark:hover:bg-white/10"  @click="groupOpen = ! groupOpen" >
+                    <h4 class="sidebar-group-heading text-base font-semibold text-zinc-900 dark:text-white cursor-pointer dark:group-hover:text-white">Deployment</h4>
                                             <button class="sidebar-group-toggle opacity-50 group-hover:opacity-100">
     <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-open" x-show="groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 12L12 8L4 8L8 12Z" fill="currentColor" />
@@ -148,14 +148,14 @@
 </button>                                    </header>
                 <ul class="sidebar-group-items ml-4 px-2 mb-2" role="list"  x-show="groupOpen" >
                                             <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/github-actions" class="-ml-8 pl-4 py-1 px-2 block border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-black/10">
+            <a href="../docs/github-actions" class="-ml-8 pl-4 py-1 px-2 block text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white">
             GitHub Actions
         </a>
     </li>                                    </ul>
             </li>
                     <li class="sidebar-group" role="listitem"  x-data="{ groupOpen: false }" >
-                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-black/10"  @click="groupOpen = ! groupOpen" >
-                    <h4 class="sidebar-group-heading text-base font-semibold cursor-pointer dark:group-hover:text-white">Configuration</h4>
+                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-zinc-900/10 dark:hover:bg-white/10"  @click="groupOpen = ! groupOpen" >
+                    <h4 class="sidebar-group-heading text-base font-semibold text-zinc-900 dark:text-white cursor-pointer dark:group-hover:text-white">Configuration</h4>
                                             <button class="sidebar-group-toggle opacity-50 group-hover:opacity-100">
     <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-open" x-show="groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 12L12 8L4 8L8 12Z" fill="currentColor" />
@@ -166,7 +166,7 @@
 </button>                                    </header>
                 <ul class="sidebar-group-items ml-4 px-2 mb-2" role="list"  x-show="groupOpen" >
                                             <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/customization" class="-ml-8 pl-4 py-1 px-2 block border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-black/10">
+            <a href="../docs/customization" class="-ml-8 pl-4 py-1 px-2 block text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white">
             Customization
         </a>
     </li>                                    </ul>
@@ -178,7 +178,7 @@
 
         </footer>
     </aside>
-    <main id="content" class="dark:bg-gray-900 min-h-screen bg-gray-50 md:bg-white absolute top-16 md:top-0 w-screen md:left-64 md:w-[calc(100vw_-_16rem)] print:top-0">
+    <main id="content" class="dark:bg-zinc-900 min-h-screen bg-white absolute top-16 md:top-0 w-screen md:left-64 md:w-[calc(100vw_-_16rem)] lg:left-72 lg:w-[calc(100vw_-_18rem)] xl:left-80 xl:w-[calc(100vw_-_20rem)] print:top-0">
         <article id="document" itemscope itemtype="https://schema.org/Article" class="mx-auto lg:ml-8 max-w-3xl p-12 md:px-16 max-w-[1000px] min-h-[calc(100vh_-_4rem)] prose dark:prose-invert">
     
             <header id="document-header" class="flex items-center flex-wrap justify-between prose-h1:mb-3">
@@ -186,19 +186,19 @@
         </header>
         <section id="document-main-content" itemprop="articleBody">
             <h2 id="composer" class="group w-fit scroll-mt-2">Composer<a href="#composer" class="heading-permalink opacity-0 ml-1 transition-opacity duration-300 ease-linear px-1 group-hover:opacity-100 focus:opacity-100 group-hover:grayscale-0 focus:grayscale-0" title="Permalink">#</a></h2>
-<pre><code class="language-bash">composer require christhompsontldr/laravel-docit
+<pre><code class="language-bash hljs bash" data-lang="bash">composer require christhompsontldr/laravel-docit
 </code></pre>
 <h2 id="monorepo" class="group w-fit scroll-mt-2">Monorepo<a href="#monorepo" class="heading-permalink opacity-0 ml-1 transition-opacity duration-300 ease-linear px-1 group-hover:opacity-100 focus:opacity-100 group-hover:grayscale-0 focus:grayscale-0" title="Permalink">#</a></h2>
 <p>Place the docit package at <code>packages/laravel-docit</code> in your repo. Add it as a path repository in your root <code>composer.json</code>:</p>
-<pre><code class="language-json">{
-  &quot;repositories&quot;: [
+<pre><code class="language-json hljs json" data-lang="json">{
+  <span class="hljs-attr">"repositories"</span>: [
     {
-      &quot;type&quot;: &quot;path&quot;,
-      &quot;url&quot;: &quot;packages/laravel-docit&quot;
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"path"</span>,
+      <span class="hljs-attr">"url"</span>: <span class="hljs-string">"packages/laravel-docit"</span>
     }
   ],
-  &quot;require&quot;: {
-    &quot;christhompsontldr/laravel-docit&quot;: &quot;@dev&quot;
+  <span class="hljs-attr">"require"</span>: {
+    <span class="hljs-attr">"christhompsontldr/laravel-docit"</span>: <span class="hljs-string">"@dev"</span>
   }
 }
 </code></pre>
@@ -206,16 +206,16 @@
 <h2 id="add-the-docit-script" class="group w-fit scroll-mt-2">Add the docit script<a href="#add-the-docit-script" class="heading-permalink opacity-0 ml-1 transition-opacity duration-300 ease-linear px-1 group-hover:opacity-100 focus:opacity-100 group-hover:grayscale-0 focus:grayscale-0" title="Permalink">#</a></h2>
 <p>Add a <code>docit</code> script to your repo's <code>composer.json</code> so you can run <code>composer docit</code>:</p>
 <p><strong>Composer-installed:</strong></p>
-<pre><code class="language-json">{
-  &quot;scripts&quot;: {
-    &quot;docit&quot;: &quot;php vendor/bin/build-docs&quot;
+<pre><code class="language-json hljs json" data-lang="json">{
+  <span class="hljs-attr">"scripts"</span>: {
+    <span class="hljs-attr">"docit"</span>: <span class="hljs-string">"php vendor/bin/build-docs"</span>
   }
 }
 </code></pre>
 <p><strong>Monorepo</strong> (docit at <code>packages/laravel-docit</code>):</p>
-<pre><code class="language-json">{
-  &quot;scripts&quot;: {
-    &quot;docit&quot;: &quot;php packages/laravel-docit/bin/build-docs&quot;
+<pre><code class="language-json hljs json" data-lang="json">{
+  <span class="hljs-attr">"scripts"</span>: {
+    <span class="hljs-attr">"docit"</span>: <span class="hljs-string">"php packages/laravel-docit/bin/build-docs"</span>
   }
 }
 </code></pre>
@@ -247,7 +247,7 @@
 </button>
 <button id="search-menu-button-mobile" x-on:click="searchWindowOpen = ! searchWindowOpen"
         :title="searchWindowOpen ? 'Close search window' : 'Open search window'; $nextTick(() => { setTimeout(() => { document.getElementById('search-input').focus(); }); });"
-        class="block md:hidden fixed bottom-4 right-4 z-10 rounded-full p-2 opacity-75 hover:opacity-100 fill-black bg-gray-200 dark:fill-gray-200 dark:bg-gray-700 print:hidden"
+        class="block md:hidden fixed bottom-4 right-4 z-10 rounded-full p-2 opacity-75 hover:opacity-100 fill-black bg-zinc-200 dark:fill-zinc-200 dark:bg-zinc-700 print:hidden"
         aria-label="Toggle search menu">
     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" role="presentation">
         <path d="M0 0h24v24H0z" fill="none"/>
@@ -257,11 +257,11 @@
 
 <div id="search-window-container" x-show="searchWindowOpen" x-cloak role="dialog" class="z-30 fixed top-0 left-0 w-screen h-screen flex flex-col items-center px-8 py-24 md:py-16">
     <aside x-on:click.away="searchWindowOpen = false" id="search-menu"
-           class="bg-white dark:bg-gray-800 z-50 p-4 rounded-lg overflow-y-hidden
+           class="bg-white dark:bg-zinc-900 z-50 p-4 rounded-lg overflow-y-hidden border border-zinc-900/10 dark:border-white/10
         min-h-[300px] max-h-[75vh] w-[70ch] max-w-full cursor-auto
         flex flex-col gap-4">
 
-        <header class="flex justify-between items-center border-b dark:border-gray-700 pb-3 md:hidden">
+        <header class="flex justify-between items-center border-b border-zinc-900/10 dark:border-white/10 pb-3 md:hidden">
             <strong>Search the documentation site</strong>
             <button @click="searchWindowOpen = false" title="Close search window"
                     class="opacity-75 hover:opacity-100" aria-label="Close search window">
@@ -279,24 +279,24 @@
 
     <div class="relative">
         <input type="search" name="search" id="search-input" x-model="searchTerm" @input="search()" placeholder="Search..." autocomplete="off" autofocus
-                class="w-full rounded-sm text-base leading-normal bg-gray-100 dark:bg-gray-700 py-2 px-3"
+                class="w-full rounded-sm text-base leading-normal bg-zinc-100 dark:bg-zinc-800 py-2 px-3 border border-zinc-900/10 dark:border-white/10"
         >
 
         <div x-show="isLoading" class="absolute right-3 top-2.5">
-            <div class="animate-spin h-5 w-5 border-2 border-gray-500 rounded-full border-t-transparent"></div>
+            <div class="animate-spin h-5 w-5 border-2 border-zinc-500 rounded-full border-t-transparent"></div>
         </div>
     </div>
 
     <div x-show="searchTerm" class="mt-4">
-        <p x-text="statusMessage" class="text-sm text-gray-600 dark:text-gray-400 mb-2 pb-2"></p>
+        <p x-text="statusMessage" class="text-sm text-zinc-600 dark:text-zinc-400 mb-2 pb-2"></p>
 
         <dl class="space-y-4 -mt-4 pl-2 -ml-2 max-h-[60vh] overflow-x-hidden overflow-y-auto">
             <template x-for="result in results" :key="result.slug">
                 <div>
                     <dt>
-                        <a :href="result.destination" x-text="result.title" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"></a><span class="text-sm text-gray-600 dark:text-gray-400" x-text="`, ${result.matches} occurrence${result.matches !== 1 ? 's' : ''} found.`"></span>
+                        <a :href="result.destination" x-text="result.title" class="text-emerald-600 dark:text-emerald-400 hover:underline font-medium"></a><span class="text-sm text-zinc-600 dark:text-zinc-400" x-text="`, ${result.matches} occurrence${result.matches !== 1 ? 's' : ''} found.`"></span>
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-700 dark:text-gray-300" x-html="result.context"></dd>
+                    <dd class="mt-1 text-sm text-zinc-700 dark:text-zinc-300" x-html="result.context"></dd>
                 </div>
             </template>
         </dl>

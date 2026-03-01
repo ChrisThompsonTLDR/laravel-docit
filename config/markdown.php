@@ -31,6 +31,8 @@ return [
     'extensions' => [
         \League\CommonMark\Extension\GithubFlavoredMarkdownExtension::class,
         \League\CommonMark\Extension\Attributes\AttributesExtension::class,
+        \App\Markdown\ContainerExtension::class,
+        \App\Markdown\HighlightExtension::class,
     ],
 
     /*
