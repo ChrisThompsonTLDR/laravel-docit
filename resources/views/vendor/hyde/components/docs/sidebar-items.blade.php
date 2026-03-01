@@ -1,5 +1,5 @@
 @if(! $sidebar->hasGroups())
-    <ul id="sidebar-items" role="list" class="pl-2">
+    <ul id="sidebar-items" role="list" class="relative pl-2 border-l border-zinc-900/10 dark:border-white/5">
         @php
             $guideItem = \Hyde\Framework\Features\Navigation\NavigationItem::create(
                 \Hyde\Pages\DocumentationPage::home(),

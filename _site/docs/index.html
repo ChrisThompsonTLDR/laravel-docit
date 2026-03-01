@@ -22,7 +22,7 @@
 <style>[x-cloak] {display: none!important}</style>
 
 
-            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=80326057">
+            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=c3123879">
     
 
     
@@ -40,7 +40,11 @@
 
 </head>
 <body id="hyde-docs" class="bg-white dark:bg-zinc-900 dark:text-zinc-100 min-h-screen w-screen relative overflow-x-hidden overflow-y-auto"
-      x-data="{ sidebarOpen: false, searchWindowOpen: false }" x-on:keydown.escape="searchWindowOpen = false; sidebarOpen = false" x-on:keydown.slash="searchWindowOpen = true">
+      x-data="{ sidebarOpen: false, searchWindowOpen: false }"
+      x-on:keydown.escape="searchWindowOpen = false; sidebarOpen = false"
+      x-on:keydown.slash.window="searchWindowOpen = true"
+      @keydown.window.prevent.ctrl.k="searchWindowOpen = true"
+      @keydown.window.prevent.meta.k="searchWindowOpen = true">
 
     <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>    <nav id="mobile-navigation" class="bg-white dark:bg-zinc-900 border-b border-zinc-900/10 dark:border-white/10 md:hidden flex justify-between w-full h-16 z-40 fixed left-0 top-0 p-4 leading-8 shadow-lg print:hidden">
     <strong class="px-2 mr-auto">
@@ -73,24 +77,18 @@
 </button>        </li>
     </ul>
 </nav>    <aside id="sidebar" x-cloak :class="sidebarOpen ? 'visible left-0' : 'invisible -left-64 md:visible md:left-0'" class="bg-white dark:bg-zinc-900 dark:text-zinc-200 h-screen w-64 lg:w-72 xl:w-80 fixed z-30 md:flex flex-col shadow-lg md:shadow-none border-r border-zinc-900/10 dark:border-white/10 transition-all duration-300">
-    <header id="sidebar-header" class="h-16">
-        <div id="sidebar-brand" class="flex items-center justify-between h-16 py-4 px-2">
-    <strong class="px-2">
-                    <a href="../docs/">
-                Docit Docs
-            </a>
-            </strong>
-    <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-zinc-700 dark:hover:text-zinc-200 opacity-75 hover:opacity-100" title="Toggle theme">
-        <span class="sr-only">Toggle dark theme</span>
-        <svg width="1.25rem" height="1.25rem" class="w-5 h-5 hidden dark:block" fill="#FFFFFF" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-        <svg width="1.25rem" height="1.25rem" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-    </button>
+    <header id="sidebar-header" class="px-4 lg:px-6 pt-4 pb-4 lg:pb-8">
+        <div id="sidebar-brand">
+    <a href="../docs/" class="text-lg font-semibold text-zinc-900 dark:text-white hover:text-zinc-700 dark:hover:text-zinc-200">
+        Docit Docs
+    </a>
 </div>    </header>
-    <nav id="sidebar-navigation" class="p-2 overflow-y-auto border-y border-zinc-900/10 dark:border-white/10 h-full">
-        <ul id="sidebar-items" role="list" class="pl-2">
-                <li class="sidebar-item -ml-4 pl-4 active bg-zinc-900/5 dark:bg-white/5" role="listitem">
-            <a href="../docs/" aria-current="true" class="-ml-4 p-2 block hover:bg-zinc-900/5 dark:hover:bg-white/5 text-emerald-600 dark:text-emerald-400 dark:font-medium border-l-[0.325rem] border-emerald-500 transition-colors duration-300 ease-in-out">
-            Guide
+    <nav id="sidebar-navigation" class="flex-1 overflow-y-auto px-4 lg:px-6 pb-8 mt-4 lg:mt-10">
+        <ul id="sidebar-items" role="list" class="relative pl-2 border-l border-zinc-900/10 dark:border-white/5">
+                <li class="relative" role="listitem">
+            <div class="absolute left-2 top-1 h-6 w-px bg-emerald-500" aria-hidden="true"></div>
+                <a href="../docs/" aria-current="true" class="flex justify-between gap-2 py-1 pr-3 text-sm transition pl-4 text-zinc-900 dark:text-white">
+            <span class="truncate">Guide</span>
         </a>
 
                     <span class="sr-only">Table of contents</span>
@@ -117,23 +115,50 @@
                 
                             </li>
             </ul>
-            </li>                    <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/github-actions" class="block -ml-4 p-2 text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent hover:bg-zinc-900/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white">
-            GitHub Actions
+            </li>                    <li class="relative" role="listitem">
+                <a href="../docs/github-actions" class="flex justify-between gap-2 py-1 pr-3 text-sm transition pl-4 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">
+            <span class="truncate">GitHub Actions</span>
         </a>
-    </li>                    <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/customization" class="block -ml-4 p-2 text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent hover:bg-zinc-900/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white">
-            Customization
+    </li>                    <li class="relative" role="listitem">
+                <a href="../docs/customization" class="flex justify-between gap-2 py-1 pr-3 text-sm transition pl-4 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">
+            <span class="truncate">Customization</span>
         </a>
     </li>            </ul>
     </nav>
-            <footer id="sidebar-footer" class="h-16 p-4 w-full bottom-0 left-0 text-center leading-8">
-            <p><a href="../">Back to home page</a></p>
+    </aside>    <header id="docs-header" class="hidden lg:flex fixed top-0 right-0 h-14 items-center justify-between gap-12 px-4 sm:px-6 lg:left-72 lg:z-30 lg:px-8 xl:left-80 backdrop-blur-sm bg-white/80 dark:bg-zinc-900/80 border-b border-zinc-900/10 dark:border-white/10">
+    <button type="button" @click="searchWindowOpen = true"
+            class="flex h-8 w-full max-w-md items-center gap-2 rounded-full bg-white pr-3 pl-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 dark:bg-white/5 dark:text-zinc-400 dark:ring-white/10 dark:hover:ring-white/20">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" class="h-5 w-5 stroke-zinc-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12.01 12a4.25 4.25 0 1 0-6.02-6 4.25 4.25 0 0 0 6.02 6Zm0 0 3.24 3.25"/>
+        </svg>
+        Find something...
+        <kbd class="ml-auto text-xs text-zinc-400 dark:text-zinc-500 font-sans">Ctrl K</kbd>
+    </button>
+    <div class="flex items-center gap-5">
+        <nav class="hidden md:block">
+            <ul role="list" class="flex items-center gap-8">
+                <li>
+                    <a href="../docs/" class="text-sm text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Guide</a>
+                </li>
+                                                                            <li>
+                            <a href="../" class="text-sm text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Home</a>
+                        </li>
+                                                                                                                    <li>
+                            <a href="https://github.com/ChrisThompsonTLDR/laravel-docit" class="text-sm text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">GitHub</a>
+                        </li>
+                                                </ul>
+        </nav>
+        <div class="hidden md:block h-5 w-px bg-zinc-900/10 dark:bg-white/15"></div>
+        <button @click="toggleTheme" class="theme-toggle-button flex items-center px-2 py-1 hover:text-zinc-700 dark:hover:text-zinc-200 opacity-75 hover:opacity-100" title="Toggle theme">
+        <span class="sr-only">Toggle dark theme</span>
+        <svg width="1.25rem" height="1.25rem" class="w-5 h-5 hidden dark:block" fill="#FFFFFF" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        <svg width="1.25rem" height="1.25rem" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    </button>
+    </div>
+</header>
 
-        </footer>
-    </aside>
-    <main id="content" class="dark:bg-zinc-900 min-h-screen bg-white absolute top-16 md:top-0 w-screen md:left-64 md:w-[calc(100vw_-_16rem)] lg:left-72 lg:w-[calc(100vw_-_18rem)] xl:left-80 xl:w-[calc(100vw_-_20rem)] print:top-0">
-        <article id="document" itemscope itemtype="https://schema.org/Article" class="mx-auto lg:ml-8 max-w-3xl p-12 md:px-16 max-w-[1000px] min-h-[calc(100vh_-_4rem)] prose dark:prose-invert">
+    <main id="content" class="dark:bg-zinc-900 min-h-screen bg-white absolute top-16 md:top-0 w-screen md:left-64 md:w-[calc(100vw_-_16rem)] lg:left-72 lg:w-[calc(100vw_-_18rem)] lg:pt-14 xl:left-80 xl:w-[calc(100vw_-_20rem)] print:top-0">
+        <article id="document" itemscope itemtype="https://schema.org/Article" class="mx-auto max-w-3xl px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12 max-w-[1000px] min-h-[calc(100vh_-_4rem)] prose dark:prose-invert">
     
             <header id="document-header" class="flex items-center flex-wrap justify-between prose-h1:mb-3">
             <h1>Docit</h1>
@@ -167,8 +192,8 @@
     <div id="support">
         <div id="sidebar-backdrop" x-cloak="" x-show="sidebarOpen" x-transition @click="sidebarOpen = false" title="Click to close sidebar" class="w-screen h-screen fixed top-0 left-0 cursor-pointer z-10 bg-black/50"></div>
                     <button id="search-menu-button" x-on:click="searchWindowOpen = ! searchWindowOpen"
-        :title="searchWindowOpen ? 'Close search window' : 'Open search window'; $nextTick(() => { setTimeout(() => { document.getElementById('search-input').focus(); }); });"
-        class="absolute right-4 top-4 mr-4 z-10 opacity-75 hover:opacity-100 hidden md:block" aria-label="Toggle search window">
+        :title="searchWindowOpen ? 'Close search window' : 'Open search window'; $nextTick(() => { setTimeout(() => { document.getElementById('search-input')?.focus(); }); });"
+        class="absolute right-4 top-4 mr-4 z-10 opacity-75 hover:opacity-100 hidden md:block lg:hidden" aria-label="Toggle search window">
     <span x-show="! searchWindowOpen">
         Search <svg class="float-left mr-1 dark:fill-white" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" role="presentation">
             <path d="M0 0h24v24H0z" fill="none"/>

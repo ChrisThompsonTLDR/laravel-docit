@@ -3,7 +3,7 @@
 @endphp
 
 <article id="document" itemscope itemtype="https://schema.org/Article" @class([
-        'mx-auto lg:ml-8 max-w-3xl p-12 md:px-16 max-w-[1000px] min-h-[calc(100vh_-_4rem)]',
+        'mx-auto max-w-3xl px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8 lg:pt-12 max-w-[1000px] min-h-[calc(100vh_-_4rem)]',
         config('markdown.prose_classes', 'prose dark:prose-invert'),
     ])>
     @yield('content')

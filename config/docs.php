@@ -31,7 +31,7 @@ return [
         'collapsible' => true,
 
         // A string of Markdown to show in the footer. Set to `false` to disable.
-        'footer' => '[Back to home page](../)',
+        'footer' => false,
 
         /*
         |--------------------------------------------------------------------------

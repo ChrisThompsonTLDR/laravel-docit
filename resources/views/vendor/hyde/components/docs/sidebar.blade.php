@@ -3,10 +3,10 @@
 @endphp
 
 <aside id="sidebar" x-cloak :class="sidebarOpen ? 'visible left-0' : 'invisible -left-64 md:visible md:left-0'" class="bg-white dark:bg-zinc-900 dark:text-zinc-200 h-screen w-64 lg:w-72 xl:w-80 fixed z-30 md:flex flex-col shadow-lg md:shadow-none border-r border-zinc-900/10 dark:border-white/10 transition-all duration-300">
-    <header id="sidebar-header" class="h-16">
+    <header id="sidebar-header" class="px-4 lg:px-6 pt-4 pb-4 lg:pb-8">
         @include('hyde::components.docs.sidebar-brand')
     </header>
-    <nav id="sidebar-navigation" class="p-2 overflow-y-auto border-y border-zinc-900/10 dark:border-white/10 h-full">
+    <nav id="sidebar-navigation" class="flex-1 overflow-y-auto px-4 lg:px-6 pb-8 mt-4 lg:mt-10">
         @include('hyde::components.docs.sidebar-items')
     </nav>
     @if($sidebar->hasFooter())
