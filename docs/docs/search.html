@@ -22,7 +22,7 @@
 <style>[x-cloak] {display: none!important}</style>
 
 
-            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=7c140de5">
+            <link rel="stylesheet" href="https://christhompsontldr.github.io/laravel-docit/media/app.css?v=80326057">
     
 
     
@@ -87,66 +87,20 @@
     </button>
 </div>    </header>
     <nav id="sidebar-navigation" class="p-2 overflow-y-auto border-y border-zinc-900/10 dark:border-white/10 h-full">
-        <ul id="sidebar-items" role="list">
-                            <li class="sidebar-group" role="listitem"  x-data="{ groupOpen: false }" >
-                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-zinc-900/10 dark:hover:bg-white/10"  @click="groupOpen = ! groupOpen" >
-                    <h4 class="sidebar-group-heading text-base font-semibold text-zinc-900 dark:text-white cursor-pointer dark:group-hover:text-white">Getting Started</h4>
-                                            <button class="sidebar-group-toggle opacity-50 group-hover:opacity-100">
-    <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-open" x-show="groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 12L12 8L4 8L8 12Z" fill="currentColor" />
-    </svg>
-    <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-closed" x-show="! groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 8L8 12L8 4L12 8Z" fill="currentColor" />
-    </svg>
-</button>                                    </header>
-                <ul class="sidebar-group-items ml-4 px-2 mb-2" role="list"  x-show="groupOpen" >
-                                            <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/installation" class="-ml-8 pl-4 py-1 px-2 block text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white">
-            Installation
+        <ul id="sidebar-items" role="list" class="pl-2">
+                <li class="sidebar-item -ml-4 pl-4" role="listitem">
+            <a href="../docs/" class="block -ml-4 p-2 text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent hover:bg-zinc-900/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white">
+            Guide
         </a>
-    </li>                                            <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/quick-start" class="-ml-8 pl-4 py-1 px-2 block text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white">
-            Quick Start
-        </a>
-    </li>                                    </ul>
-            </li>
-                    <li class="sidebar-group" role="listitem"  x-data="{ groupOpen: false }" >
-                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-zinc-900/10 dark:hover:bg-white/10"  @click="groupOpen = ! groupOpen" >
-                    <h4 class="sidebar-group-heading text-base font-semibold text-zinc-900 dark:text-white cursor-pointer dark:group-hover:text-white">Deployment</h4>
-                                            <button class="sidebar-group-toggle opacity-50 group-hover:opacity-100">
-    <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-open" x-show="groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 12L12 8L4 8L8 12Z" fill="currentColor" />
-    </svg>
-    <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-closed" x-show="! groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 8L8 12L8 4L12 8Z" fill="currentColor" />
-    </svg>
-</button>                                    </header>
-                <ul class="sidebar-group-items ml-4 px-2 mb-2" role="list"  x-show="groupOpen" >
-                                            <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/github-actions" class="-ml-8 pl-4 py-1 px-2 block text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white">
+    </li>                    <li class="sidebar-item -ml-4 pl-4" role="listitem">
+            <a href="../docs/github-actions" class="block -ml-4 p-2 text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent hover:bg-zinc-900/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white">
             GitHub Actions
         </a>
-    </li>                                    </ul>
-            </li>
-                    <li class="sidebar-group" role="listitem"  x-data="{ groupOpen: false }" >
-                <header class="sidebar-group-header p-2 px-4 -ml-2 flex justify-between items-center group hover:bg-zinc-900/10 dark:hover:bg-white/10"  @click="groupOpen = ! groupOpen" >
-                    <h4 class="sidebar-group-heading text-base font-semibold text-zinc-900 dark:text-white cursor-pointer dark:group-hover:text-white">Configuration</h4>
-                                            <button class="sidebar-group-toggle opacity-50 group-hover:opacity-100">
-    <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-open" x-show="groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 12L12 8L4 8L8 12Z" fill="currentColor" />
-    </svg>
-    <svg class="sidebar-group-toggle-icon sidebar-group-toggle-icon-closed" x-show="! groupOpen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 8L8 12L8 4L12 8Z" fill="currentColor" />
-    </svg>
-</button>                                    </header>
-                <ul class="sidebar-group-items ml-4 px-2 mb-2" role="list"  x-show="groupOpen" >
-                                            <li class="sidebar-item -ml-4 pl-4" role="listitem">
-            <a href="../docs/customization" class="-ml-8 pl-4 py-1 px-2 block text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent transition-colors duration-300 ease-in-out hover:bg-zinc-900/10 dark:hover:bg-white/10 hover:text-zinc-900 dark:hover:text-white">
+    </li>                    <li class="sidebar-item -ml-4 pl-4" role="listitem">
+            <a href="../docs/customization" class="block -ml-4 p-2 text-zinc-600 dark:text-zinc-400 border-l-[0.325rem] border-transparent hover:bg-zinc-900/5 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white">
             Customization
         </a>
-    </li>                                    </ul>
-            </li>
-            </ul>
+    </li>            </ul>
     </nav>
             <footer id="sidebar-footer" class="h-16 p-4 w-full bottom-0 left-0 text-center leading-8">
             <p><a href="../">Back to home page</a></p>
