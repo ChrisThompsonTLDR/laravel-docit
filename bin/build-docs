@@ -172,19 +172,4 @@ foreach ($iterator as $item) {
 $nojekyll = $outputPath . DIRECTORY_SEPARATOR . '.nojekyll';
 touch($nojekyll);
 
-// 5. Ensure output dir is in project .gitignore (skip when building docit itself)
-$gitignorePath = $projectRoot . DIRECTORY_SEPARATOR . '.gitignore';
-if ($projectRoot !== $packageDir && file_exists($gitignorePath)) {
-    $normalized = str_replace(DIRECTORY_SEPARATOR, '/', $outputDir);
-    $gitignoreEntry = '/' . $normalized;
-    $content = file_get_contents($gitignorePath);
-    $escaped = preg_quote($normalized, '#');
-    $alreadyPresent = preg_match('#(?:^|\n)(?:/)?' . $escaped . '(?:/)?(?:\s|$|\n)#m', $content);
-    if (!$alreadyPresent) {
-        $content = rtrim($content) . "\n" . $gitignoreEntry . "\n";
-        file_put_contents($gitignorePath, $content);
-        echo "Added {$gitignoreEntry} to .gitignore\n";
-    }
-}
-
 echo "Docs built successfully to {$outputPath}\n";
