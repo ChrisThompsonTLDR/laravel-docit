@@ -162,7 +162,7 @@ return [
         \Hyde\Pages\HtmlPage::class => '_pages',
         \Hyde\Pages\MarkdownPage::class => '_pages',
         \Hyde\Pages\MarkdownPost::class => '_posts',
-        \Hyde\Pages\DocumentationPage::class => '_docs',
+        \Hyde\Pages\DocumentationPage::class => 'docs',
     ],
 
     /*

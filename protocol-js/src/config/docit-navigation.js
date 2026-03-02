@@ -1,4 +1,4 @@
-// Auto-generated from _docs - do not edit
+// Auto-generated from docs - do not edit
 export const navigation = [
   {
     title: 'Guides',
@@ -33,3 +33,7 @@ export const topLevelNavItems = [
 ]
 
 export const showSignIn = false
+
+export const editBaseUrl = "https://github.com/ChrisThompsonTLDR/laravel-docit/edit/main"
+
+export const siteName = "laravel-docit"

@@ -1,5 +1,6 @@
 import glob from 'fast-glob'
 
+import { siteName } from '@/config/docit-navigation'
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 
@@ -7,8 +8,8 @@ import '@/styles/tailwind.css'
 
 export const metadata = {
   title: {
-    template: '%s - Docit',
-    default: 'Docit',
+    template: `%s - ${siteName}`,
+    default: siteName,
   },
 }
 

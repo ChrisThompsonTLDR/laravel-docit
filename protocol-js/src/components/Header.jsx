@@ -1,9 +1,10 @@
 import clsx from 'clsx'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { Github } from 'lucide-react'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
-import { showSignIn } from '@/config/docit-navigation'
+import { showSignIn, topLevelNavItems } from '@/config/docit-navigation'
 import { Button } from '@/components/Button'
 import { Logo } from '@/components/Logo'
 import {
@@ -15,15 +16,21 @@ import { MobileSearch, Search } from '@/components/Search'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { CloseButton } from '@headlessui/react'
 
-function TopLevelNavItem({ href, children }) {
+function TopLevelNavItem({ href, children, icon }) {
+  const isExternal = href.startsWith('http')
+  const className =
+    'text-sm/5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white flex items-center gap-1.5'
   return (
     <li>
-      <Link
-        href={href}
-        className="text-sm/5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
-      >
-        {children}
-      </Link>
+      {isExternal ? (
+        <a href={href} className={className} target="_blank" rel="noopener noreferrer" aria-label={children}>
+          {icon || children}
+        </a>
+      ) : (
+        <Link href={href} className={className}>
+          {children}
+        </Link>
+      )}
     </li>
   )
 }
@@ -71,9 +78,15 @@ export const Header = forwardRef(function Header({ className, ...props }, ref) {
       <div className="flex items-center gap-5">
         <nav className="hidden md:block">
           <ul role="list" className="flex items-center gap-8">
-            <TopLevelNavItem href="/">API</TopLevelNavItem>
-            <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
-            <TopLevelNavItem href="#">Support</TopLevelNavItem>
+            {topLevelNavItems.map((item) => (
+              <TopLevelNavItem
+                key={item.href}
+                href={item.href}
+                icon={item.href.includes('github.com') ? <Github className="h-5 w-5" /> : undefined}
+              >
+                {item.children}
+              </TopLevelNavItem>
+            ))}
           </ul>
         </nav>
         <div className="hidden md:block md:h-5 md:w-px md:bg-zinc-900/10 md:dark:bg-white/15" />

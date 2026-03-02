@@ -1,4 +1,4 @@
-# Reusable workflow: build docs site and optionally commit.
+# Reusable workflow: build docs site and deploy to GitHub Pages.
 # Call from your root .github/workflows/ to build and deploy docs.
 #
 # Usage from root workflow:
@@ -7,10 +7,11 @@
 #       uses: ./packages/laravel-docit/.github/workflows/build-docs.yml
 #       with:
 #         docit-path: packages/laravel-docit
-#         commit: true
 #
 # For Composer-installed docit (vendor/christhompsontldr/laravel-docit):
 #   docit-path: vendor/christhompsontldr/laravel-docit
+#
+# GitHub Pages: Set repo Settings → Pages → Source to "GitHub Actions"
 
 name: Build docs (docit)
 
@@ -22,17 +23,22 @@ on:
         required: false
         default: 'packages/laravel-docit'
         type: string
-      commit:
-        description: 'Commit built docs to the repository'
+      output-dir:
+        description: 'Output directory (DOCIT_OUTPUT_DIR). Default docs/dist.'
         required: false
-        default: true
+        default: 'docs/dist'
+        type: string
+      commit:
+        description: 'Commit output instead of deploying via Actions (for Deploy from a branch)'
+        required: false
+        default: false
         type: boolean
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: ${{ inputs.commit && 'write' || 'read' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -54,14 +60,30 @@ jobs:
       - name: Build docs
         env:
           DOCIT_PROJECT_ROOT: ${{ github.workspace }}
+          DOCIT_OUTPUT_DIR: ${{ inputs.output-dir }}
         run: php ${{ inputs.docit-path }}/bin/build-docs
 
-      - name: Add .nojekyll
-        run: touch docs/.nojekyll
+      - name: Upload artifact
+        if: ${{ !inputs.commit }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ inputs.output-dir }}
 
-      - name: Commit docs
+      - name: Commit output
         if: inputs.commit
         uses: EndBug/add-and-commit@v9
         with:
-          add: docs
+          add: ${{ inputs.output-dir }}
           message: Build docs site
+
+  deploy:
+    if: ${{ !inputs.commit }}
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment: github-pages
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

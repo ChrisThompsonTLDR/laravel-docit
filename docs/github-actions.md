@@ -1,8 +1,8 @@
-export const metadata = {
-  title: 'GitHub Actions',
-  description: 'Docit documentation',
-}
-
+---
+title: GitHub Actions
+navigation:
+  priority: 30
+---
 
 # GitHub Actions
 
@@ -72,4 +72,3 @@ jobs:
 1. Set **Source** to "Deploy from a branch"
 2. Set **Branch** to `main` and folder to `/docs` (or your `output-dir`)
 3. Use a workflow that commits the built output instead of deploying via Actions
-

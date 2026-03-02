@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Sync _docs/*.md to protocol-js/src/app for Protocol UI build.
- * Data source: _docs. UI: Protocol.
+ * Sync docs/*.md to protocol-js/src/app for Protocol UI build.
+ * Data source: docs. UI: Protocol.
  */
 
 import fs from 'fs'
@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
-const docsDir = path.join(root, '_docs')
+const docsDir = path.join(root, 'docs')
 const protocolAppDir = path.join(root, 'protocol-js', 'src', 'app')
 
 // Doc order and labels from config (keep in sync with config/docs.php)
@@ -60,7 +60,7 @@ ${bodyClean}
 
 function syncDocs() {
   if (!fs.existsSync(docsDir)) {
-    console.error('_docs directory not found')
+    console.error('docs directory not found')
     process.exit(1)
   }
 
@@ -91,7 +91,11 @@ function syncDocs() {
     href: slug === 'index' ? '/' : `/${slug}`,
   }))
 
-  const navConfig = `// Auto-generated from _docs - do not edit
+  const editBaseUrl =
+    process.env.DOCIT_EDIT_BASE_URL ||
+    'https://github.com/ChrisThompsonTLDR/laravel-docit/edit/main'
+
+  const navConfig = `// Auto-generated from docs - do not edit
 export const navigation = [
   {
     title: 'Guides',
@@ -105,13 +109,17 @@ export const topLevelNavItems = [
 ]
 
 export const showSignIn = false
+
+export const editBaseUrl = ${JSON.stringify(editBaseUrl)}
+
+export const siteName = ${JSON.stringify(process.env.DOCIT_SITE_NAME || 'laravel-docit')}
 `
 
   const navPath = path.join(root, 'protocol-js', 'src', 'config', 'docit-navigation.js')
   fs.mkdirSync(path.dirname(navPath), { recursive: true })
   fs.writeFileSync(navPath, navConfig)
 
-  console.log('Synced _docs to protocol-js')
+  console.log('Synced docs to protocol-js')
 }
 
 syncDocs()
