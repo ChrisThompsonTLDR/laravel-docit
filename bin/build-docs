@@ -10,11 +10,27 @@
  */
 
 $packageDir = realpath(dirname(__DIR__));
+
+function findProjectRoot(string $startDir): string {
+    $dir = $startDir;
+    while ($dir !== '/' && $dir !== '') {
+        if (file_exists($dir . DIRECTORY_SEPARATOR . 'composer.json')) {
+            return $dir;
+        }
+        $parent = dirname($dir);
+        if ($parent === $dir) {
+            break;
+        }
+        $dir = $parent;
+    }
+    return $startDir;
+}
+
 $projectRoot = getenv('DOCIT_PROJECT_ROOT')
     ? realpath(getenv('DOCIT_PROJECT_ROOT'))
     : (in_array('--self', $argv ?? [], true)
         ? $packageDir
-        : dirname(dirname($packageDir)));
+        : findProjectRoot(dirname($packageDir)));
 
 $outputDir = trim(getenv('DOCIT_OUTPUT_DIR') ?: 'docs/dist');
 if ($outputDir === '' || preg_match('#\.\.|^/#', $outputDir)) {
