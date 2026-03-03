@@ -36,12 +36,16 @@ jobs:
     uses: ./packages/laravel-docit/.github/workflows/build-docs.yml
     with:
       docit-path: packages/laravel-docit
-      output-dir: docs   # or dist, build, etc.
+      output-dir: docs/dist
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
 ```
 
 ## Option B: Inline workflow (Composer-installed)
 
-When docit is installed via Composer:
+When docit is installed via Composer, create `.github/workflows/docs.yml`:
 
 ```yaml
 name: Build and Deploy Docs
@@ -53,10 +57,14 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build-docs.yml
+    uses: ChrisThompsonTLDR/laravel-docit/.github/workflows/build-docs.yml@main
     with:
       docit-path: vendor/christhompsontldr/laravel-docit
-      output-dir: docs   # or dist, build, etc.
+      output-dir: docs/dist
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
 ```
 
 ## GitHub Pages setup

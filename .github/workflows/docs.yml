@@ -10,3 +10,7 @@ jobs:
     uses: ./.github/workflows/build-docs.yml
     with:
       docit-path: .
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
