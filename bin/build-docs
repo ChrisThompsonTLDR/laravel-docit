@@ -41,6 +41,9 @@ $outputPath = $projectRoot . DIRECTORY_SEPARATOR . $outputDir;
 
 chdir($packageDir);
 
+// Ensure sync script sees project root (consuming project's docs, not package docs)
+putenv('DOCIT_PROJECT_ROOT=' . $projectRoot);
+
 // 1. Sync docs to protocol-js
 $syncCmd = 'node scripts/sync-docs-to-protocol.js';
 passthru($syncCmd, $code);

@@ -10,17 +10,38 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, '..')
-const docsDir = path.join(root, 'docs')
+const projectRoot = process.env.DOCIT_PROJECT_ROOT ? path.resolve(process.env.DOCIT_PROJECT_ROOT) : null
+const docsDir = projectRoot
+  ? path.join(projectRoot, process.env.DOCIT_DOCS_DIR || 'docs')
+  : path.join(root, 'docs')
 const protocolAppDir = path.join(root, 'protocol-js', 'src', 'app')
 
-// Doc order and labels from config (keep in sync with config/docs.php)
-const DOC_ORDER = ['index', 'installation', 'quick-start', 'github-actions', 'customization']
-const DOC_LABELS = {
+// Doc order and labels: use project config if present, else package defaults
+const DOCIT_CONFIG_PATH = projectRoot ? path.join(projectRoot, 'docit.json') : null
+let DOC_ORDER = ['index', 'installation', 'quick-start', 'github-actions', 'customization']
+let DOC_LABELS = {
   index: 'Guide',
   'installation': 'Installation',
   'quick-start': 'Quick Start',
   'github-actions': 'GitHub Actions',
   'customization': 'Customization',
+}
+let docitEditBaseUrl = null
+let docitSiteName = null
+if (DOCIT_CONFIG_PATH && fs.existsSync(DOCIT_CONFIG_PATH)) {
+  try {
+    const cfg = JSON.parse(fs.readFileSync(DOCIT_CONFIG_PATH, 'utf8'))
+    if (cfg.order) DOC_ORDER = cfg.order
+    if (cfg.labels) DOC_LABELS = { ...DOC_LABELS, ...cfg.labels }
+    if (cfg.editBaseUrl) docitEditBaseUrl = cfg.editBaseUrl
+    if (cfg.siteName) docitSiteName = cfg.siteName
+  } catch (_) {}
+} else if (projectRoot && fs.existsSync(docsDir)) {
+  // Auto-discover: index first, then rest alphabetically
+  const files = fs.readdirSync(docsDir).filter(f => f.endsWith('.md'))
+  const slugs = files.map(f => f === 'index.md' ? 'index' : f.replace(/\.md$/, ''))
+  const rest = slugs.filter(s => s !== 'index').sort()
+  DOC_ORDER = slugs.includes('index') ? ['index', ...rest] : rest
 }
 
 function extractFrontmatter(content) {
@@ -93,6 +114,7 @@ function syncDocs() {
 
   const editBaseUrl =
     process.env.DOCIT_EDIT_BASE_URL ||
+    docitEditBaseUrl ||
     'https://github.com/ChrisThompsonTLDR/laravel-docit/edit/main'
 
   const navConfig = `// Auto-generated from docs - do not edit
@@ -112,7 +134,7 @@ export const showSignIn = false
 
 export const editBaseUrl = ${JSON.stringify(editBaseUrl)}
 
-export const siteName = ${JSON.stringify(process.env.DOCIT_SITE_NAME || 'laravel-docit')}
+export const siteName = ${JSON.stringify(process.env.DOCIT_SITE_NAME || docitSiteName || 'laravel-docit')}
 `
 
   const navPath = path.join(root, 'protocol-js', 'src', 'config', 'docit-navigation.js')
