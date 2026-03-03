@@ -172,4 +172,8 @@ foreach ($iterator as $item) {
 $nojekyll = $outputPath . DIRECTORY_SEPARATOR . '.nojekyll';
 touch($nojekyll);
 
+// 5. Add .gitignore inside output dir (ignores build output, not parent .gitignore)
+$outputGitignore = $outputPath . DIRECTORY_SEPARATOR . '.gitignore';
+file_put_contents($outputGitignore, "*\n!.gitignore\n");
+
 echo "Docs built successfully to {$outputPath}\n";
