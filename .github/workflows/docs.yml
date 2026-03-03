@@ -10,6 +10,7 @@ jobs:
     uses: ./.github/workflows/build-docs.yml
     with:
       docit-path: .
+      base-path: /laravel-docit
     permissions:
       contents: write
       pages: write

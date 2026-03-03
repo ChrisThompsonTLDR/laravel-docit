@@ -33,6 +33,11 @@ on:
         required: false
         default: false
         type: boolean
+      base-path:
+        description: 'Base path for assets (e.g. /laravel-docit for GitHub Pages project sites)'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   build:
@@ -61,6 +66,7 @@ jobs:
         env:
           DOCIT_PROJECT_ROOT: ${{ github.workspace }}
           DOCIT_OUTPUT_DIR: ${{ inputs.output-dir }}
+          DOCIT_BASE_PATH: ${{ inputs.base-path }}
         run: php ${{ inputs.docit-path }}/bin/build-docs
 
       - name: Upload artifact
