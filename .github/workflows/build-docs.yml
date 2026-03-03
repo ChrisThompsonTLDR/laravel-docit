@@ -38,7 +38,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: ${{ inputs.commit && 'write' || 'read' }}
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
