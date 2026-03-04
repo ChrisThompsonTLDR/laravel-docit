@@ -1,1 +1,0 @@
-{{ Hyde::markdown($sidebar->getFooter()) }}

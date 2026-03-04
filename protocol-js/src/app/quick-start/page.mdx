@@ -26,19 +26,13 @@ The built site is written to `DOCIT_OUTPUT_DIR` (default `docs/dist`) in your pr
 
 ## 3. Content structure
 
-Docit uses HydePHP's content directories:
-
 | Directory | Purpose |
 |-----------|---------|
 | `docs` | Documentation pages (Markdown) |
-| `_pages` | Static pages like index, 404 (Markdown or HTML) |
-| `_posts` | Blog posts (optional) |
 
-Place your Markdown files in `docs/` in the docit package (or your consuming package). The sidebar order and labels are configured in `config/docs.php`.
+Place your Markdown files in `docs/` in the docit package (or your consuming package). Use `docit.json` in your project root to customize sidebar order and labels.
 
 ## 4. Customization
 
-- **Site name & URL**: `config/hyde.php` or `.env` (`SITE_NAME`, `SITE_URL`)
-- **Sidebar**: `config/docs.php`
-- **Navigation**: `config/hyde.php` → `navigation`
+- **Site name & URL**: Set via `DOCIT_SITE_NAME` and `DOCIT_EDIT_BASE_URL` env vars or in `docit.json`
 

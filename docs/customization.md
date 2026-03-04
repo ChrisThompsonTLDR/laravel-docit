@@ -6,45 +6,34 @@ navigation:
 
 # Customization
 
-Docit uses HydePHP under the hood. Customize via config files in the docit package (or publish them to your project).
+Create a `docit.json` file in your project root to customize the docs site.
 
 ## Site identity
 
-In `config/hyde.php` or `.env`:
-
-```
-SITE_NAME=My Project
-SITE_URL=https://username.github.io/my-repo/
-```
-
-## Documentation sidebar
-
-Edit `config/docs.php`:
-
-- **order** – Page identifiers in sidebar order
-- **labels** – Custom display names
-- **header** – Sidebar title
-- **footer** – Markdown link at bottom (e.g. "Back to home")
-
-## Navigation menu
-
-In `config/hyde.php`, the `navigation` key controls the main nav:
-
-```php
-'navigation' => [
-    'order' => ['index' => 0, 'docs/index' => 100],
-    'labels' => ['index' => 'Home', 'docs/index' => 'Documentation'],
-    'exclude' => ['404'],
-],
+```json
+{
+  "siteName": "My Project",
+  "editBaseUrl": "https://github.com/username/repo/edit/main"
+}
 ```
 
-## Content directories
+## Sidebar order and labels
 
-By default, docs live in `docs/`, pages in `_pages`. These are configured in `config/hyde.php` under `source_directories` and `output_directories`.
+```json
+{
+  "order": ["index", "installation", "quick-start", "customization"],
+  "labels": {
+    "index": "Guide",
+    "installation": "Installation",
+    "quick-start": "Quick Start",
+    "customization": "Customization"
+  }
+}
+```
 
 ## Custom containers (cards)
 
-Docit adds a Markdown extension for VitePress-style custom containers. Use `::: card` and `::: card-grid` for card layouts:
+Use `::: card` and `::: card-grid` for card layouts:
 
 ```md
 ::: card-grid

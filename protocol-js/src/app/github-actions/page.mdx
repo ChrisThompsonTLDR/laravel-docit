@@ -19,6 +19,8 @@ Set `DOCIT_OUTPUT_DIR` (or the workflow's `output-dir` input) to control where t
 | `dist` | Flat build output |
 | `build` | Alternative build output |
 
+**base-path:** For GitHub Pages project sites (`username.github.io/repo-name`), set `base-path: /repo-name` so assets load correctly.
+
 ## Option A: Reusable workflow (monorepo)
 
 When docit lives at `packages/laravel-docit`, add to `.github/workflows/docs.yml`:
@@ -36,12 +38,16 @@ jobs:
     uses: ./packages/laravel-docit/.github/workflows/build-docs.yml
     with:
       docit-path: packages/laravel-docit
-      output-dir: docs   # or dist, build, etc.
+      output-dir: docs/dist
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
 ```
 
 ## Option B: Inline workflow (Composer-installed)
 
-When docit is installed via Composer:
+When docit is installed via Composer, create `.github/workflows/docs.yml`:
 
 ```yaml
 name: Build and Deploy Docs
@@ -53,10 +59,14 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build-docs.yml
+    uses: ChrisThompsonTLDR/laravel-docit/.github/workflows/build-docs.yml@main
     with:
       docit-path: vendor/christhompsontldr/laravel-docit
-      output-dir: docs   # or dist, build, etc.
+      output-dir: docs/dist
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
 ```
 
 ## GitHub Pages setup
