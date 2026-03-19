@@ -28,6 +28,28 @@ let DOC_LABELS = {
 }
 let docitEditBaseUrl = null
 let docitSiteName = null
+let docitGithubUrl = null
+
+// Auto-detect siteName and githubUrl from host package's composer.json
+const composerJsonPath = projectRoot ? path.join(projectRoot, 'composer.json') : null
+if (composerJsonPath && fs.existsSync(composerJsonPath)) {
+  try {
+    const composer = JSON.parse(fs.readFileSync(composerJsonPath, 'utf8'))
+    if (composer.name) {
+      // Use the package part after the vendor prefix as the site name
+      const sepIndex = composer.name.indexOf('/')
+      docitSiteName = sepIndex !== -1 ? composer.name.slice(sepIndex + 1) : composer.name
+    }
+    if (composer.homepage) {
+      docitGithubUrl = composer.homepage
+    } else if (composer.support && composer.support.source) {
+      docitGithubUrl = composer.support.source
+    }
+  } catch (e) {
+    // Silently ignore invalid composer.json; built-in defaults will be used
+  }
+}
+
 if (DOCIT_CONFIG_PATH && fs.existsSync(DOCIT_CONFIG_PATH)) {
   try {
     const cfg = JSON.parse(fs.readFileSync(DOCIT_CONFIG_PATH, 'utf8'))
@@ -35,7 +57,10 @@ if (DOCIT_CONFIG_PATH && fs.existsSync(DOCIT_CONFIG_PATH)) {
     if (cfg.labels) DOC_LABELS = { ...DOC_LABELS, ...cfg.labels }
     if (cfg.editBaseUrl) docitEditBaseUrl = cfg.editBaseUrl
     if (cfg.siteName) docitSiteName = cfg.siteName
-  } catch (_) {}
+    if (cfg.githubUrl) docitGithubUrl = cfg.githubUrl
+  } catch (e) {
+    // Silently ignore invalid docit.json; previously detected values will be used
+  }
 } else if (projectRoot && fs.existsSync(docsDir)) {
   // Auto-discover: index first, then rest alphabetically
   const files = fs.readdirSync(docsDir).filter(f => f.endsWith('.md'))
@@ -71,8 +96,8 @@ function mdToMdx(mdContent, slug) {
     .replace(/:::\s*\n?/g, '')
 
   return `export const metadata = {
-  title: '${title.replace(/'/g, "\\'")}',
-  description: 'Docit documentation',
+  title: ${JSON.stringify(title)},
+  description: ${JSON.stringify((process.env.DOCIT_SITE_NAME || docitSiteName || 'Docit') + ' documentation')},
 }
 
 ${bodyClean}
@@ -112,6 +137,11 @@ function syncDocs() {
     href: slug === 'index' ? '/' : `/${slug}`,
   }))
 
+  const githubUrl =
+    process.env.DOCIT_GITHUB_URL ||
+    docitGithubUrl ||
+    'https://github.com/ChrisThompsonTLDR/laravel-docit'
+
   const editBaseUrl =
     process.env.DOCIT_EDIT_BASE_URL ||
     docitEditBaseUrl ||
@@ -127,7 +157,7 @@ export const navigation = [
 
 export const topLevelNavItems = [
   { href: '/', children: 'Guide' },
-  { href: 'https://github.com/ChrisThompsonTLDR/laravel-docit', children: 'GitHub' },
+  { href: ${JSON.stringify(githubUrl)}, children: 'GitHub' },
 ]
 
 export const showSignIn = false

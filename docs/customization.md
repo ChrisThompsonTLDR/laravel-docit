@@ -13,9 +13,12 @@ Create a `docit.json` file in your project root to customize the docs site.
 ```json
 {
   "siteName": "My Project",
+  "githubUrl": "https://github.com/username/repo",
   "editBaseUrl": "https://github.com/username/repo/edit/main"
 }
 ```
+
+`siteName` and `githubUrl` are auto-detected from your project's `composer.json` (`name` and `homepage`/`support.source`) if not set explicitly.
 
 ## Sidebar order and labels
 
