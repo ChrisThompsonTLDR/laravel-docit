@@ -40,10 +40,10 @@ if (composerJsonPath && fs.existsSync(composerJsonPath)) {
       const sepIndex = composer.name.indexOf('/')
       docitSiteName = sepIndex !== -1 ? composer.name.slice(sepIndex + 1) : composer.name
     }
-    if (composer.homepage) {
-      docitGithubUrl = composer.homepage
-    } else if (composer.support && composer.support.source) {
+    if (composer.support && composer.support.source) {
       docitGithubUrl = composer.support.source
+    } else if (composer.homepage) {
+      docitGithubUrl = composer.homepage
     }
   } catch (e) {
     // Silently ignore invalid composer.json; built-in defaults will be used
