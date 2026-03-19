@@ -18,7 +18,7 @@ Create a `docit.json` file in your project root to customize the docs site.
 }
 ```
 
-`siteName` and `githubUrl` are auto-detected from your project's `composer.json` (`name` and `homepage`/`support.source`) if not set explicitly.
+`siteName` and `githubUrl` are auto-detected from your project's `composer.json` if not set explicitly. `siteName` uses the package name (the part after the vendor prefix in `name`). `githubUrl` uses `support.source` first, falling back to `homepage` when not set.
 
 ## Sidebar order and labels
 

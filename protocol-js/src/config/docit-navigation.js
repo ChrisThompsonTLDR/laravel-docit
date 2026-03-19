@@ -8,20 +8,20 @@ export const navigation = [
             "href": "/"
       },
       {
-            "title": "Customization",
-            "href": "/customization"
-      },
-      {
-            "title": "GitHub Actions",
-            "href": "/github-actions"
-      },
-      {
             "title": "Installation",
             "href": "/installation"
       },
       {
             "title": "Quick Start",
             "href": "/quick-start"
+      },
+      {
+            "title": "GitHub Actions",
+            "href": "/github-actions"
+      },
+      {
+            "title": "Customization",
+            "href": "/customization"
       }
 ],
   },
