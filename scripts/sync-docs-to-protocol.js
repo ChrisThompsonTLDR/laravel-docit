@@ -97,7 +97,7 @@ function mdToMdx(mdContent, slug) {
 
   return `export const metadata = {
   title: ${JSON.stringify(title)},
-  description: ${JSON.stringify((process.env.DOCIT_SITE_NAME || docitSiteName || 'Docit') + ' documentation')},
+  description: ${JSON.stringify((process.env.DOCIT_SITE_NAME || docitSiteName || 'laravel-docit') + ' documentation')},
 }
 
 ${bodyClean}
