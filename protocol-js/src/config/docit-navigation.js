@@ -8,20 +8,20 @@ export const navigation = [
             "href": "/"
       },
       {
-            "title": "Customization",
-            "href": "/customization"
-      },
-      {
-            "title": "GitHub Actions",
-            "href": "/github-actions"
-      },
-      {
             "title": "Installation",
             "href": "/installation"
       },
       {
             "title": "Quick Start",
             "href": "/quick-start"
+      },
+      {
+            "title": "GitHub Actions",
+            "href": "/github-actions"
+      },
+      {
+            "title": "Customization",
+            "href": "/customization"
       }
 ],
   },
@@ -29,7 +29,7 @@ export const navigation = [
 
 export const topLevelNavItems = [
   { href: '/', children: 'Guide' },
-  { href: 'https://github.com/ChrisThompsonTLDR/laravel-docit', children: 'GitHub' },
+  { href: "https://github.com/ChrisThompsonTLDR/laravel-docit", children: 'GitHub' },
 ]
 
 export const showSignIn = false
